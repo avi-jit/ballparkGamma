@@ -18,6 +18,7 @@ function getMedal(score) {
 }
 
 export default function LobbyStats(props) {
+    // eslint-disable-next-line
   const { highscore, resetGame, score } = props;
 
   const animProps = useSpring({
