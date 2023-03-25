@@ -11,12 +11,15 @@ import supabase from "./config/supabaseClient"
 import DropDown from "./DropDown";
 import JoinRoom from "./JoinRoom";
 import CreateRoom from "./CreateRoom";
+import Score from "./Score";
 import Roomscores from "./Roomscores";
+import Button from "./Button";
 
 export default function Game() {
   const [state, setState] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [started, setStarted] = useState(false);
+  const [shareText, setShareText] = useState("Share Code");
   const [items, setItems] = useState(null);
   const [createdRoom, setCreatedRoom] = useState(localStorage.getItem("createdRoom")?localStorage.getItem("createdRoom"):null)
   const [questions, setQuestions] = useState(null);
@@ -160,6 +163,19 @@ export default function Game() {
     }
     setStarted(true);
   }
+  
+
+  const share = useCallback(async () => {
+    await navigator?.clipboard?.writeText(
+      `🏛️ https://ballpark-gamma.netlify.app/\n\n
+      Game code:${localStorage.getItem("createdRoom")}\nClick on the link and enter the code`
+    );
+    setShareText("Copied");
+    setTimeout(() => {
+      setShareText("Share code");
+    }, 2000);
+  }, []);
+
   const startGameBeta=()=>{
     setStarted(true);
   }
@@ -270,8 +286,14 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     return(
       <>
       <Instructions highscore={highscore} start={startGameBeta} />
-      <h1 style={{color:"white"}}>{localStorage.getItem("createdRoom")}</h1>
-      <h1>{String(played)}</h1>
+      <div style={{marginTop:"20px"}}>
+      <Score score={localStorage.getItem("createdRoom")} title="Game code" />
+      </div>
+      <div style={{margin:"10px"}}>
+      <Button onClick={share} text={shareText} minimal />
+      </div>
+      
+      
       <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom"))}}>End game</button>
       </>
     )
