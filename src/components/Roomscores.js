@@ -1,18 +1,14 @@
 import React, {useEffect,useState} from 'react'
 import supabase from "./config/supabaseClient"
-import { animated, useSpring } from "react-spring";
-import styles from "../styles/game-over.module.scss";
-import Score from "./Score";
+
+
 
 
 export default function Roomscores(props) {
     const {createdRoom} = props;
-    const animProps = useSpring({
-        opacity: 1,
-        from: { opacity: 0 },
-        config: { duration: 500 },
-      });
+    
     const [scoreDict, setScoreDict] = useState({})
+    const [scoreArr,setScoreArr] = useState([])
     useEffect(()=>{
         const fetchScores = async()=>{
             const {data,error}=await supabase.from('gameRoom').select('*').eq('id',createdRoom);
@@ -23,25 +19,44 @@ export default function Roomscores(props) {
                 console.log(error)
             }
         }
+        const makeArray=()=>{
+            var items = Object.keys(scoreDict).map(function(key){
+                return[key, scoreDict[key]];
+            });
+            items.sort(function(first,second){
+                return second[1]-first[1];
+            });
+            setScoreArr(items);
+
+        }
         fetchScores();
-    })
+        makeArray();
+    },[createdRoom,scoreDict])
     
   return (
     <div>
-        {
-            Object.keys(scoreDict).map((key,index)=>(
-                <animated.div style={animProps} className={styles.gameOver}>
-                <div className={styles.scoresWrapper}>
-                    <div className={styles.score}>
-                    <Score score={key} title="Name" />
-                    </div>
-                    <div className={styles.score}>
-                    <Score score={scoreDict[key]} title="Score" />
-                    </div>
-                </div>
-                </animated.div>
+        <table className="table table-dark table-striped" style={{marginTop:"20px"}}>
+            <thead>
+                <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Name</th>
+                <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+            {
+            scoreArr.map((key,index)=>(
+                <tr>
+                    <th scope="row">{index+1}</th>
+                    <td>{key[0]}</td>
+                    <td>{key[1]}</td>
+                </tr>
             ))
         }
+
+            </tbody>
+        </table>
+        
     </div>
   )
 }

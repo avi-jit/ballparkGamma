@@ -279,7 +279,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     if(played){
       return(
         <>
-        <h1 style={{color:"white"}}>Lobby Scores</h1>
+        <h1 style={{color:"white"}}>Leader-board</h1>
         <div style={{marginTop:"20px"}}>
         <Score score={localStorage.getItem("createdRoom")} title="Game code" />
         </div>

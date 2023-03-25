@@ -42,6 +42,7 @@ export default function LobbyStats(props) {
   }, [highscore, score]);
 
   return (
+    <>
     <animated.div style={animProps} className={styles.gameOver}>
       <div className={styles.scoresWrapper}>
         <div className={styles.score}>
@@ -56,5 +57,6 @@ export default function LobbyStats(props) {
         <Button onClick={share} text={shareText} minimal />
       </div>
     </animated.div>
+    </>
   );
 }
