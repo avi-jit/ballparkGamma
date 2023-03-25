@@ -21,7 +21,7 @@ export default function Game() {
   const [started, setStarted] = useState(false);
   const [shareText, setShareText] = useState("Share Code");
   const [items, setItems] = useState(null);
-  const [createdRoom, setCreatedRoom] = useState(localStorage.getItem("createdRoom")?localStorage.getItem("createdRoom"):null)
+  const [createdRoom, setCreatedRoom] = useState(localStorage.getItem("createdRoom")?localStorage.getItem("createdRoom"):"")
   const [questions, setQuestions] = useState(null);
   const [played,setPlayed] = useState(false);
   const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
@@ -115,7 +115,7 @@ export default function Game() {
     // eslint-disable-next-line
   }, [questions]);
   async function playedRoom(){
-    window.location.reload();
+    //window.location.reload();
     const{data,error} = await supabase.from('gameRoom').select('*').eq("id",createdRoom);
     console.log(localStorage.getItem("username"))
     if(data){
@@ -181,6 +181,7 @@ export default function Game() {
   }
   const createGame= async()=>{
     localStorage.setItem("username",name);
+    setPlayed(false);
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
@@ -277,7 +278,10 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     if(played){
       return(
         <>
-        <h1 style={{color:"white"}}>You have played</h1>
+        <h1 style={{color:"white"}}>Lobby Scores</h1>
+        <div style={{marginTop:"20px"}}>
+        <Score score={localStorage.getItem("createdRoom")} title="Game code" />
+        </div>
         <Roomscores createdRoom={createdRoom}/>
         <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom"))}}>End game</button>
         </>

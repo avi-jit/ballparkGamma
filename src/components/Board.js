@@ -9,6 +9,7 @@ import styles from "../styles/board.module.scss";
 import Hearts from "./Hearts";
 import GameOver from "./Game-over";
 import supabase from "./config/supabaseClient";
+import LobbyStats from "./LobbyStats";
 
 export default function Board(props) {
   const { highscore, resetGame, state, setState, updateHighscore, createdRoom, name} = props;
@@ -151,11 +152,25 @@ export default function Board(props) {
               <NextItemList next={state.next} />
             </>
           ) : (
-            <GameOver
-              highscore={highscore}
-              resetGame={resetGame}
-              score={score}
-            />
+            <>{
+              createdRoom?(
+                <>
+                <LobbyStats
+                highscore={highscore}
+                resetGame={resetGame}
+                score={score}/>
+                </>
+              ):
+              (
+                <>
+                <GameOver
+                highscore={highscore}
+                resetGame={resetGame}
+                score={score}/>
+                </>
+              )
+            }
+            </>
           )}
         </div>
         <div id="bottom" className={styles.bottom}>
