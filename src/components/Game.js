@@ -283,7 +283,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
         <Score score={localStorage.getItem("createdRoom")} title="Game code" />
         </div>
         <Roomscores createdRoom={createdRoom}/>
-        <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom"))}}>End game</button>
+        <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom")); window.location.reload()}}>End game</button>
         </>
       )
     }
@@ -298,7 +298,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       </div>
       
       
-      <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom"))}}>End game</button>
+      <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom"));window.location.reload()}}>End game</button>
       </>
     )
   }
