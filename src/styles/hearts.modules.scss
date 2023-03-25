@@ -1,0 +1,12 @@
+@import "./variables";
+
+.hearts {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .heart {
+    height: 5px;
+    margin: 10px;
+  }
+}

@@ -1,0 +1,10 @@
+@import "./variables";
+
+.dropDown{
+    display: block;
+    align-items: center;
+    //justify-content: center;
+    .items{
+        display: block;
+    }
+}
