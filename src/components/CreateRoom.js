@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function CreateRoom(props) {
+    // eslint-disable-next-line
     const {questions, createGame} = props;
   return (
     <div>

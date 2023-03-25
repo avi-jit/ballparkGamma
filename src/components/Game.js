@@ -59,6 +59,7 @@ export default function Game() {
       }
       }
       else{
+        // eslint-disable-next-line
         const{data,error} = await supabase.from('gameRoom').select('*').eq("id",createdRoom);
         setQuestions(data[0].ques);
         console.log(data[0].scores[localStorage.getItem("username")]);
@@ -92,6 +93,7 @@ export default function Game() {
 
     fetchGameData();
     fetchQuestion();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -224,6 +226,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   console.log(localStorage.getItem("username"))
   console.log(questions.length);
   playedRoom();
+  // eslint-disable-next-line
 },[questions,name])
   const resetGame = useCallback(() => {
     const resetGameAsync = async () => {

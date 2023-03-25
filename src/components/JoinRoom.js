@@ -1,6 +1,7 @@
 import React , {useState} from 'react'
 import supabase from "./config/supabaseClient"
 export default function JoinRoom(props) {
+    // eslint-disable-next-line
     const {questions,setJoinedRoomQuestions} = props;
     const[code,setCode] = useState(null)
     const onHandleChange=(ele)=>{
@@ -8,6 +9,7 @@ export default function JoinRoom(props) {
         console.log(ele.target.value)
     }
     async function joinRoom(){
+        // eslint-disable-next-line
         const {data,error} = await supabase.from('gameRoom').select('*').eq("id",code);
         setJoinedRoomQuestions(data[0].ques,code);
 

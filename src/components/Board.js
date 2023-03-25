@@ -25,6 +25,7 @@ export default function Board(props) {
       console.log(data,error);
   }
   async function setSupabaseScore(name,score,createdRoom){
+    // eslint-disable-next-line
     const{data,error} = await supabase.from("gameRoom").select('*').eq('id',createdRoom);
     console.log(data[0]);
     console.log(data[0].scores);
