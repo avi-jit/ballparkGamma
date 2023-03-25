@@ -292,7 +292,9 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       <Instructions highscore={highscore} start={startGameBeta} />
       <div style={{marginTop:"20px"}}>
       <Score score={localStorage.getItem("createdRoom")} title="Game code" />
+      <span style={{marginLeft:"5px"}}><Score score={name} title="Username" /></span>
       </div>
+
       <div style={{margin:"10px"}}>
       <Button onClick={share} text={shareText} minimal />
       </div>
