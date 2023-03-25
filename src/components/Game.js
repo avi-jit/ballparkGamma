@@ -168,8 +168,7 @@ export default function Game() {
 
   const share = useCallback(async () => {
     await navigator?.clipboard?.writeText(
-      `🏛️ https://ballpark-gamma.netlify.app/\n\n
-      Game code:${localStorage.getItem("createdRoom")}\nClick on the link and enter the code`
+      `🏛️ https://ballpark-gamma.netlify.app/\n\nGame code:${localStorage.getItem("createdRoom")}\nClick on the link and enter the code`
     );
     setShareText("Copied");
     setTimeout(() => {
