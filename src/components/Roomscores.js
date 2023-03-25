@@ -35,7 +35,7 @@ export default function Roomscores(props) {
     
   return (
     <div>
-        <table className="table table-dark table-striped" style={{marginTop:"20px"}}>
+        <table className="table table-dark table-striped" style={{marginLeft:"auto",marginRight:"auto", marginBottom:"20px", width:"80%"}}>
             <thead>
                 <tr>
                 <th scope="col">Rank</th>

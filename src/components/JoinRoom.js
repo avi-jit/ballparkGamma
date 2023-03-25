@@ -11,6 +11,10 @@ export default function JoinRoom(props) {
     async function joinRoom(){
         // eslint-disable-next-line
         const {data,error} = await supabase.from('gameRoom').select('*').eq("id",code);
+        if(data.length===0 || error){
+            window.alert("No such game found");
+            return;
+        }
         setJoinedRoomQuestions(data[0].ques,code);
 
     }
