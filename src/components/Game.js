@@ -24,6 +24,7 @@ export default function Game() {
   const [createdRoom, setCreatedRoom] = useState(localStorage.getItem("createdRoom")?localStorage.getItem("createdRoom"):"")
   const [questions, setQuestions] = useState(null);
   const [played,setPlayed] = useState(false);
+  //const [joinedRoom, setJoinedRoom] = useState(false);
   const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
     const onHandleChange=(ele)=>{

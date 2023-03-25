@@ -21,7 +21,7 @@ export default function Instructions(props) {
         )}
         <Button onClick={start} text="Start game" />
         <div className={styles.about}>
-          <div>
+          <div style={{display:"none"}}>
             All data sourced from{" "}
             <a
               href="https://www.wikidata.org"
@@ -40,7 +40,7 @@ export default function Instructions(props) {
             </a>
             .
           </div>
-          <div>
+          <div style={{display:"none"}}>
             Have feedback? Please report it on{" "}
             <a
               href="https://github.com/harsh1245-bit/numeracy-facts/issues/"
