@@ -119,14 +119,9 @@ export default function Game() {
     //window.location.reload();
     const{data,error} = await supabase.from('gameRoom').select('*').eq("id",createdRoom);
     console.log(localStorage.getItem("username"))
-    if(data){
-      console.log(data);
-      console.log(data[0].scores[localStorage.getItem("username")]);
-        if(data[0].scores[localStorage.getItem("username")]){
-          setPlayed(true);
-          console.log(played);
-        }
-
+    if(data[0].scores[localStorage.getItem("username")] || data[0].scores[localStorage.getItem("username")]===0){
+      setPlayed(true);
+      console.log(played);
     }
     if(error){
       console.log(error);
@@ -235,7 +230,7 @@ export default function Game() {
     }
     return result;
 }
-const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
+const setJoinedRoomQuestions = useCallback(async(roomQues,code)=>{
   setQuestions(roomQues);
   setCreatedRoom(code);
   localStorage.setItem("createdRoom",code);
@@ -243,6 +238,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   console.log(localStorage.getItem("username"))
   console.log(questions.length);
   playedRoom();
+  
   // eslint-disable-next-line
 },[questions,name])
   const resetGame = useCallback(() => {
