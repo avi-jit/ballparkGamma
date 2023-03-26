@@ -115,10 +115,11 @@ export default function Game() {
     
     // eslint-disable-next-line
   }, [questions]);
-  async function playedRoom(){
+   const playedRoom =async(code)=>{
     //window.location.reload();
-    const{data,error} = await supabase.from('gameRoom').select('*').eq("id",createdRoom);
+    const{data,error} = await supabase.from('gameRoom').select('*').eq("id",code);
     console.log(localStorage.getItem("username"))
+    console.log(data);
     if(data[0].scores[localStorage.getItem("username")] || data[0].scores[localStorage.getItem("username")]===0){
       setPlayed(true);
       console.log(played);
@@ -128,6 +129,7 @@ export default function Game() {
     }
     
   }
+  
   const startGame = ()=>{
     const arr = []
     let x = 0;
@@ -230,14 +232,19 @@ export default function Game() {
     }
     return result;
 }
-const setJoinedRoomQuestions = useCallback(async(roomQues,code)=>{
+const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
+  if(name==="" || code===""){
+    window.alert("Some field is empty");
+    return;
+  }
+  
   setQuestions(roomQues);
   setCreatedRoom(code);
   localStorage.setItem("createdRoom",code);
   localStorage.setItem("username",name);
   console.log(localStorage.getItem("username"))
   console.log(questions.length);
-  playedRoom();
+  playedRoom(code);
   
   // eslint-disable-next-line
 },[questions,name])
@@ -309,10 +316,10 @@ const setJoinedRoomQuestions = useCallback(async(roomQues,code)=>{
       <br />
       <div style={{width:"70%", margin:"auto"}}>
         <div className="input-group mb-3">
-        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Should be unique" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
         <div className="input-group-append">
             
-            <span className="input-group-text" style={{padding:"0px"}}>Username</span>
+            <span className="input-group-text" style={{padding:"6px"}}>Username</span>
         </div>
         </div>
     </div>
