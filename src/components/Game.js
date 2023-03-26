@@ -24,6 +24,7 @@ export default function Game() {
   const [createdRoom, setCreatedRoom] = useState(localStorage.getItem("createdRoom")?localStorage.getItem("createdRoom"):"")
   const [questions, setQuestions] = useState(null);
   const [played,setPlayed] = useState(false);
+  const [create, setCreate] = useState(false);
   //const [joinedRoom, setJoinedRoom] = useState(false);
   const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
@@ -93,10 +94,16 @@ export default function Game() {
         ;
       setItems(items);
     };
-    
+    const deletion=()=>{
+      if(localStorage.getItem("toDelete")){
+        console.log(localStorage.getItem("toDelete"))
+        deleteGmae(localStorage.getItem("toDelete"))
+      }
+    }
 
     fetchGameData();
     fetchQuestion();
+    deletion();
     // eslint-disable-next-line
   }, []);
 
@@ -179,6 +186,7 @@ export default function Game() {
   const createGame= async()=>{
     localStorage.setItem("username",name);
     setPlayed(false);
+    setCreate(true);
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
@@ -220,6 +228,16 @@ export default function Game() {
       }
     }
 
+  }
+  async function deleteGmae(code){
+    const {data,error} = await supabase.from('gameRoom').delete().match({'id':code}).select();
+    if(data){
+      console.log(data);
+    }
+    if(error){
+      console.log(error);
+    }
+    console.log("deleting");
   }
   function makeid(length) {
     let result = '';
@@ -286,7 +304,27 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
         <Score score={localStorage.getItem("createdRoom")} title="Game code" />
         </div>
         <Roomscores createdRoom={createdRoom}/>
-        <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom")); window.location.reload()}}>End game</button>
+        {create?(
+        <>
+        <button className="btn btn-secondary" onClick={()=>{
+        localStorage.removeItem("createdRoom");
+        setCreatedRoom(null); 
+        console.log(localStorage.getItem("createdRoom"));
+        setCreate(false);
+        //deleteGmae();
+        localStorage.setItem("toDelete",createdRoom);
+        window.location.reload();
+        
+         }}>End game</button>
+        </>
+      ):(
+        <button className="btn btn-secondary" onClick={()=>{
+          localStorage.removeItem("createdRoom");
+          setCreatedRoom(null); 
+          console.log(localStorage.getItem("createdRoom"));
+          window.location.reload()
+           }}>Leave game</button>
+      )}
         </>
       )
     }
@@ -302,8 +340,28 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       <Button onClick={share} text={shareText} minimal />
       </div>
       
+      {create?(
+        <>
+        <button className="btn btn-secondary" onClick={()=>{
+        localStorage.removeItem("createdRoom");
+        setCreatedRoom(null); 
+        console.log(localStorage.getItem("createdRoom"));
+        setCreate(false);
+        //deleteGmae();
+        localStorage.setItem("toDelete",createdRoom);
+        window.location.reload();
+        
+         }}>End game</button>
+        </>
+      ):(
+        <button className="btn btn-secondary" onClick={()=>{
+          localStorage.removeItem("createdRoom");
+          setCreatedRoom(null); 
+          console.log(localStorage.getItem("createdRoom"));
+          window.location.reload()
+           }}>Leave game</button>
+      )}
       
-      <button className="btn btn-secondary" onClick={()=>{localStorage.removeItem("createdRoom"); setCreatedRoom(null); console.log(localStorage.getItem("createdRoom"));window.location.reload()}}>End game</button>
       </>
     )
   }
