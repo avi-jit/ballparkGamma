@@ -184,6 +184,10 @@ export default function Game() {
     setStarted(true);
   }
   const createGame= async()=>{
+    if(name===""){
+      window.alert('Username is empty');
+      return;
+    }
     localStorage.setItem("username",name);
     setPlayed(false);
     setCreate(true);

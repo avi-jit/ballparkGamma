@@ -7,11 +7,11 @@
   }
   
   .top {
-    grid-row: 1;
+    grid-row: 2;
   }
   
   .bottom {
-    grid-row: 2;
+    grid-row: 1;
     overflow-x: auto;
     display: flex;
     align-items: center;

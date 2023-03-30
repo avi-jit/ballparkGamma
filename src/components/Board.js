@@ -145,6 +145,17 @@ export default function Board(props) {
       sensors={[useAutoMoveSensor.bind(null, state)]}
     >
       <div className={styles.wrapper}>
+        
+        <div id="bottom" className={styles.bottom}>
+         
+          <PlayedItemList
+            badlyPlacedIndex={
+              state.badlyPlaced === null ? null : state.badlyPlaced.index
+            }
+            isDragging={isDragging}
+            items={state.played}
+          />
+        </div>
         <div className={styles.top}>
           <Hearts lives={state.lives} />
           {state.lives > 0 ? (
@@ -172,15 +183,6 @@ export default function Board(props) {
             }
             </>
           )}
-        </div>
-        <div id="bottom" className={styles.bottom}>
-          <PlayedItemList
-            badlyPlacedIndex={
-              state.badlyPlaced === null ? null : state.badlyPlaced.index
-            }
-            isDragging={isDragging}
-            items={state.played}
-          />
         </div>
       </div>
     </DragDropContext>
