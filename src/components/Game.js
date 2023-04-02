@@ -25,6 +25,7 @@ export default function Game() {
   const [questions, setQuestions] = useState(null);
   const [played,setPlayed] = useState(false);
   const [create, setCreate] = useState(false);
+  const [joiningRoom, setJoiningRoom] = useState(false);
   //const [joinedRoom, setJoinedRoom] = useState(false);
   const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
@@ -225,7 +226,7 @@ export default function Game() {
       if(localStorage.getItem("createdRoom")===null && finalArr.length>=21)
       {
         const RoomId=makeid(5)
-        const {data,error} = await supabase.from('gameRoom').insert({id:RoomId,ques:finalArr}).select()
+        const {data,error} = await supabase.from('gameRoom').insert({id:RoomId,ques:finalArr,names:[name]}).select()
         console.log(data,error);
         setCreatedRoom(RoomId)
         localStorage.setItem("createdRoom",RoomId)
@@ -254,6 +255,10 @@ export default function Game() {
     }
     return result;
 }
+const setRoom = ()=>{
+  setJoiningRoom(true);
+  console.log("ye chal rha")
+}
 const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if(name==="" || code===""){
     window.alert("Some field is empty");
@@ -267,7 +272,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   console.log(localStorage.getItem("username"))
   console.log(questions.length);
   playedRoom(code);
-  
+  setJoiningRoom(false);
   // eslint-disable-next-line
 },[questions,name])
   const resetGame = useCallback(() => {
@@ -298,6 +303,26 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   
   if (!loaded || state === null) {
     return <Loading />;
+  }
+  if(joiningRoom){
+    return(
+      <>
+      <h2 style={{color:"white", textTransform: "uppercase",fontStyle: "italic",marginTop:"20px"}}>Place the cards on the numberline in the correct order.</h2>
+      <h2 style={{color:"white", textTransform: "uppercase",fontStyle: "italic"}}>Multiplayer</h2>
+      <div style={{width:"70%", margin:"auto"}}>
+        <div className="input-group mb-3">
+        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        <div className="input-group-append">
+            
+            
+        </div>
+        </div>
+    </div>
+      
+      <JoinRoom questions={questions} setJoinedRoomQuestions = {setJoinedRoomQuestions} name={name}/>
+      
+      </>
+    )
   }
   if(createdRoom && started===false){
     if(played){
@@ -334,7 +359,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     }
     return(
       <>
-      <Instructions highscore={highscore} start={startGameBeta} />
+      <Instructions highscore={highscore} start={startGameBeta} typ={"Start Game"} />
       <div style={{marginTop:"20px"}}>
       <Score score={localStorage.getItem("createdRoom")} title="Game code" />
       <span style={{marginLeft:"5px"}}><Score score={name} title="Username" /></span>
@@ -372,22 +397,24 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if (!started) {
     return (
       <>
-      <Instructions highscore={highscore} start={startGame} />
-      <DropDown countries={countries} updateCountries={updateCountries}/>
+      <Instructions highscore={highscore} start={startGame} typ={"Single Player"} />
+      <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
       <br />
       <br />
+
+      <h3 style={{color:"white", textTransform: "uppercase",fontStyle: "italic", marginTop:"5px", marginBottom:"5px"}}>----Multiplayer----</h3>
       <div style={{width:"70%", margin:"auto"}}>
         <div className="input-group mb-3">
-        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Should be unique" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
         <div className="input-group-append">
             
-            <span className="input-group-text" style={{padding:"6px"}}>Username</span>
+            
         </div>
         </div>
     </div>
-      <JoinRoom questions={questions} setJoinedRoomQuestions = {setJoinedRoomQuestions}/>
       
-      <CreateRoom questions={questions} createGame = {createGame} />
+      
+      <CreateRoom questions={questions} createGame = {createGame} joiningRoom={joiningRoom} setRoom={setRoom} />
       </>
     );
   }

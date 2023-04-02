@@ -2,13 +2,14 @@ import React from "react";
 
 import styles from "../styles/instructions.module.scss";
 import Button from "./Button";
-import Score from "./Score";
+
 
 
 
 export default function Instructions(props) {
-  const { highscore, start } = props;
-
+  const { highscore, start, typ } = props;
+  console.log(typ)
+  
   return (
     <div className={styles.instructions}>
       <div className={styles.wrapper}>
@@ -16,10 +17,10 @@ export default function Instructions(props) {
         
         {highscore !== 0 && (
           <div className={styles.highscoreWrapper}>
-            <Score score={highscore} title="Best streak" />
+            
           </div>
         )}
-        <Button onClick={start} text="Start game" />
+        <Button onClick={start} text={typ} />
         <div className={styles.about}>
           <div style={{display:"none"}}>
             All data sourced from{" "}
