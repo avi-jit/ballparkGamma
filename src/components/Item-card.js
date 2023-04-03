@@ -107,7 +107,7 @@ export default function ItemCard(props) {
               <div
                 className={styles.image}
                 
-              ><img className={styles.image} src={item.code==="none"?"/images/world.jpg":`https://flagcdn.com/w320/${item.code}.png`} alt="..." /></div>
+              ><img className={styles.image} src={item.code==="none"?"/images/blank.jpeg":`https://flagcdn.com/w320/${item.code}.png`} alt="..." /></div>
               
               <animated.div
                 className={classNames(styles.bottom, {
