@@ -100,7 +100,7 @@ export default function ItemCard(props) {
             >
               <div className={styles.top}>
                 <div className={styles.label}>{item.country}</div>
-                <div className={styles.description}>{item.question} in {item.year}</div>
+                <div className={styles.description}>{item.question} {item.year===0?" ":"- " +item.year}</div>
                 
                 
               </div>

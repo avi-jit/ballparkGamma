@@ -27,7 +27,15 @@ export default function Game() {
   const [create, setCreate] = useState(false);
   const [joiningRoom, setJoiningRoom] = useState(false);
   //const [joinedRoom, setJoinedRoom] = useState(false);
-  const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
+  const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany','Age',
+  'Calorie burnt',
+  'Cost',
+  'Event',
+  'Height',
+  'Length',
+  'Number of users',
+  'Speed',
+  'Weight', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
     const onHandleChange=(ele)=>{
         setname(ele.target.value)
@@ -38,7 +46,14 @@ export default function Game() {
 
     const fetchQuestion= async ()=>{
       if(!createdRoom){
-        const suffs = ['people', '%', 'US $', 'tonnes', 'years','kWh/person']
+        const suffs = ['people', '%', 'US $', 'tonnes', 'years','kWh/person','AD',
+        'Calories',
+        'Feets',
+        'USD',
+        'kg',
+        'mph',
+        
+        'years']
       const tag = suffs[Math.floor(Math.random()*suffs.length)]
       console.log(tag);
       const {data, error} = await supabase
