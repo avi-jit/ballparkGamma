@@ -176,6 +176,10 @@ export default function Game() {
             arr[x].answer = (arr[x].answer/1000000000).toFixed(1);
             arr[x].answer = arr[x].answer*1000000000;
           }
+          else if(arr[x].answer>999999999999 && arr[x].answer<999999999999999){
+            arr[x].answer = (arr[x].answer/1000000000000).toFixed(1);
+            arr[x].answer = arr[x].answer*1000000000000;
+          }
           x=x+1;
         }
       }
