@@ -41,20 +41,20 @@ export default function ItemCard(props) {
     if(number<10000){
       return number;
     }
-    else if(number<100000){
+    else if(number<=100000){
       let x = number/1000;
       return x.toFixed(1) + " K";
     }
-    else if(number<100000000){
-      let x = number/100000;
+    else if(number<1000000000){
+      let x = number/1000000;
       return x.toFixed(1) + " M";
     }
-    else if(number<100000000000){
-      let x = number/100000000;
+    else if(number<1000000000000){
+      let x = number/1000000000;
       return x.toFixed(1) + " B";
     }
-    else if(number<100000000000000){
-      let x = number/100000000000;
+    else if(number<1000000000000000){
+      let x = number/1000000000000;
       return x.toFixed(1) + " T";
     }
     else if(number==='slide to answer')
