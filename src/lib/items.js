@@ -49,6 +49,7 @@ export function checkCorrect(played, item, index) {
   const sorted = [...played, item].sort((a, b) => a.answer - b.answer);
   console.log("sorted", sorted);
   const correctIndex = sorted.findIndex((i) => {
+    
     return i.id === item.id;
   });
   /*console.log(index,correctIndex);
