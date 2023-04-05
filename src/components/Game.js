@@ -46,14 +46,7 @@ export default function Game() {
 
     const fetchQuestion= async ()=>{
       if(!createdRoom){
-        const suffs = ['people', '%', 'US $', 'tonnes', 'years','kWh/person','AD',
-        'Calories',
-        'Feets',
-        'USD',
-        'kg',
-        'mph',
-        
-        'years']
+        const suffs = ['%']
       const tag = suffs[Math.floor(Math.random()*suffs.length)]
       console.log(tag);
       const {data, error} = await supabase
@@ -152,7 +145,30 @@ export default function Game() {
     }
     
   }
-  
+  const roundingQuestions=(arr)=>{
+    const arrNew = arr;
+    for(let x=0; x<arrNew.length; x++){
+      if(arrNew[x].answer>9999 && arrNew[x].answer<999999){
+        arrNew[x].answer = (arrNew[x].answer/1000).toFixed(1);
+        //console.log(arrNew[x].answer);
+        arrNew[x].answer = arrNew[x].answer*1000;
+      }
+      else if(arrNew[x].answer>999999 && arrNew[x].answer<999999999){
+        arrNew[x].answer = (arrNew[x].answer/1000000).toFixed(1);
+        arrNew[x].answer = arrNew[x].answer*1000000;
+      }
+      else if(arrNew[x].answer>999999999 && arrNew[x].answer<999999999999){
+        arrNew[x].answer = (arrNew[x].answer/1000000000).toFixed(1);
+        arrNew[x].answer = arrNew[x].answer*1000000000;
+      }
+      else if(arrNew[x].answer>999999999999 && arrNew[x].answer<999999999999999){
+        arrNew[x].answer = (arrNew[x].answer/1000000000000).toFixed(1);
+        arrNew[x].answer = arrNew[x].answer*1000000000000;
+      }
+      
+    }
+    setQuestions(arrNew);
+  }
   const startGame = ()=>{
     const arr = []
     let x = 0;
@@ -284,7 +300,8 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     return;
   }
   
-  setQuestions(roomQues);
+  //setQuestions(roomQues);
+  roundingQuestions(roomQues);
   setCreatedRoom(code);
   localStorage.setItem("createdRoom",code);
   localStorage.setItem("username",name);
