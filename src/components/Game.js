@@ -46,7 +46,14 @@ export default function Game() {
 
     const fetchQuestion= async ()=>{
       if(!createdRoom){
-        const suffs = ['%']
+        const suffs = ['people', '%', 'US $', 'tonnes', 'years','kWh/person','AD',
+        'Calories',
+        'Feets',
+        'USD',
+        'kg',
+        'mph',
+        
+        'years']
       const tag = suffs[Math.floor(Math.random()*suffs.length)]
       console.log(tag);
       const {data, error} = await supabase
