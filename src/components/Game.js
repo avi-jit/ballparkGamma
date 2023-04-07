@@ -440,6 +440,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if (!started) {
     return (
       <>
+      
       <Instructions highscore={highscore} start={startGame} typ={"Single Player"} />
       <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
       <br />
