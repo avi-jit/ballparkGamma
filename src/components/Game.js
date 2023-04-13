@@ -52,7 +52,15 @@ export default function Game() {
         'USD',
         'kg',
         'mph',
-        
+        '$',
+ 'Cricket facts',
+ 'Energy facts',
+ 'Environmental facts',
+ 'Football facts',
+ 'Geopolitical facts',
+ 'Hollywood facts',
+ 'Music facts',
+ 'Political facts',
         'years']
       const tag = suffs[Math.floor(Math.random()*suffs.length)]
       console.log(tag);
