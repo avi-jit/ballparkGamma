@@ -44,6 +44,7 @@ export default function Game() {
  'Hollywood',
  'Music',
  'Politics',
+ 'Astronomy',
   'Weight', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
     const onHandleChange=(ele)=>{
@@ -70,6 +71,7 @@ export default function Game() {
  'Hollywood facts',
  'Music facts',
  'Political facts',
+ 'Astronomical facts',
         'years']
       const tag = suffs[Math.floor(Math.random()*suffs.length)]
       console.log(tag);
