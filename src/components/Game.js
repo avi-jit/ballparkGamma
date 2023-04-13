@@ -35,6 +35,15 @@ export default function Game() {
   'Length',
   'Number of users',
   'Speed',
+  'Cricket',
+ 'Energy',
+ 'Environment',
+ 'Finance',
+ 'Football',
+ 'Geopolitics',
+ 'Hollywood',
+ 'Music',
+ 'Politics',
   'Weight', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
     const onHandleChange=(ele)=>{
