@@ -14,6 +14,7 @@ import CreateRoom from "./CreateRoom";
 import Score from "./Score";
 import Roomscores from "./Roomscores";
 import Button from "./Button";
+import SuffDropDown from "./SuffDropDown";
 
 export default function Game() {
   const [state, setState] = useState(null);
@@ -46,6 +47,28 @@ export default function Game() {
  'Politics',
  'Astronomy',
   'Weight', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea']));
+  const [suffix,setSuffix] = useState(new Set(['people',
+  '%',
+  'US $',
+  'tonnes',
+  'years',
+  'kWh/person',
+  'AD',
+  'Calories',
+  'Feets',
+  'USD',
+  'kg',
+  'mph',
+  '$',
+  'Cricket facts',
+  'Energy facts',
+  'Environmental facts',
+  'Football facts',
+  'Geopolitical facts',
+  'Hollywood facts',
+  'Music facts',
+  'Political facts',
+  'Astronomical facts']));
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
     const onHandleChange=(ele)=>{
         setname(ele.target.value)
@@ -86,16 +109,9 @@ export default function Game() {
       
       if(data){
         const x =data;
-        /*const quesArray = [];
-        const  num = Math.floor(Math.random()*suffList.length);
-        const reqTag = suffList[num];
-        for(let i=0; i<x.length; i++){
-          if(x[i].suffix===reqTag){
-            quesArray.push(x[i]);
-          }
-        }*/
+       
         setQuestions(x);
-        //console.log(data);
+        
       }
       }
       else{
@@ -195,7 +211,30 @@ export default function Game() {
     }
     setQuestions(arrNew);
   }
+  const settingSuffixques = async ()=>{
+    
+    const suffs = Array.from(suffix);
+    const tag = suffs[Math.floor(Math.random()*suffs.length)]
+    console.log(tag);
+    const {data, error} = await supabase
+    .from('ourWorld')
+    .select('*').eq('suffix',tag);
+
+    if(error){
+        console.log("error")
+        
+    }
+    
+    if(data){
+      const x =data;
+     
+      setQuestions(x);
+      
+    }
+    
+  }
   const startGame = ()=>{
+    settingSuffixques();
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
@@ -253,6 +292,7 @@ export default function Game() {
     localStorage.setItem("username",name);
     setPlayed(false);
     setCreate(true);
+    settingSuffixques();
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
@@ -356,6 +396,11 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   const updateCountries = useCallback((countrySet)=>{
     setCountries(countrySet);
     console.log(countries)
+    // eslint-disable-next-line
+  },[])
+  const updateSuffix = useCallback((suffixSet)=>{
+    setSuffix(suffixSet);
+    console.log(suffix)
     // eslint-disable-next-line
   },[])
   const updateHighscore = useCallback((score) => {
@@ -462,6 +507,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       
       <Instructions highscore={highscore} start={startGame} typ={"Single Player"} />
       <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
+      <div ><SuffDropDown suffix={suffix} updateSuffix={updateSuffix}/></div>
       <br />
       <br />
 
