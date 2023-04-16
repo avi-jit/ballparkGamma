@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const pages = ['Home', 'About'];
+
 
 const darkTheme = createTheme({
     palette: {
@@ -38,6 +38,10 @@ function Header() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const handleHomeCloseNavMenu = () => {
+    setAnchorElNav(null);
+    window.location.reload();
   };
 
  
@@ -96,7 +100,7 @@ function Header() {
               }}
             >
               
-                <MenuItem key={1} onClick={handleCloseNavMenu}>
+                <MenuItem key={1} onClick={handleHomeCloseNavMenu}>
                   <Typography textAlign="center" href="/">Home</Typography>
                 </MenuItem>
                 <MenuItem key={2} onClick={handleCloseNavMenu}>
@@ -125,15 +129,22 @@ function Header() {
             Ballpark
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            
               <Button
-                key={page}
+                key={1}
+                onClick={handleHomeCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Home
+              </Button>
+              <Button
+                key={2}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                About
               </Button>
-            ))}
+            
           </Box>
 
           
