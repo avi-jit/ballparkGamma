@@ -8,12 +8,14 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 
+import Rodal from 'rodal';
+
 import Button from '@mui/material/Button';
 
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
+import 'rodal/lib/rodal.css';
 
 
 const darkTheme = createTheme({
@@ -28,16 +30,23 @@ const darkTheme = createTheme({
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [visible,setVisible] = React.useState(false);
   
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+  const show = ()=>{
+    setVisible(true);
+  }
 
-  
+  const hide = ()=>{
+    setVisible(false);
+  }
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    show();
   };
   const handleHomeCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -47,6 +56,7 @@ function Header() {
  
 
   return (
+    <>
     <ThemeProvider theme={darkTheme}>
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -152,6 +162,21 @@ function Header() {
       </Container>
     </AppBar>
     </ThemeProvider>
+    <Rodal visible={visible} onClose={hide}>
+          <div>
+            <h6>Ballpark - A Numeracy facts game</h6>
+            <div style={{textAlign:'left', margin:"2px"}}>
+            <ul>
+                <li>Instructions: Put the cards correctly on the number line in ascending order. You can play in single player mode, or multiplayer mode.</li>
+                <li>Created by <a href="https://github.com/harsh1245-bit" target="_blank" rel="noopener noreferrer">Harsh</a> under the supervision of <a href="https://github.com/avi-jit" target="_blank" rel="noopener noreferrer">Avijit thawani</a>.</li>
+                <li>Disclaimer: Data is ChatGPT generated but is almost always correct, though sometimes outdated.</li>
+            </ul>
+
+            </div>
+            
+        </div>
+    </Rodal>
+    </>
   );
 }
 export default Header;
