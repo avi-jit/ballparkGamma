@@ -524,6 +524,12 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       
       
       <CreateRoom questions={questions} createGame = {createGame} joiningRoom={joiningRoom} setRoom={setRoom} />
+
+      <h6 style={{position: 'fixed',
+ width: '100%',
+ bottom: '0',
+ color: 'white',
+ }}>Disclaimer: Data is ChatGPT generated but is almost always correct, though sometimes outdated.</h6>
       </>
     );
   }
