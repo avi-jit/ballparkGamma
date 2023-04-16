@@ -162,7 +162,7 @@ function Header() {
       </Container>
     </AppBar>
     </ThemeProvider>
-    <Rodal visible={visible} onClose={hide}>
+    <Rodal visible={visible} width={350} height={300} onClose={hide}>
           <div>
             <h6>Ballpark - A Numeracy facts game</h6>
             <div style={{textAlign:'left', margin:"2px"}}>
