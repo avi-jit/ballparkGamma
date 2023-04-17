@@ -379,10 +379,9 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
 },[questions,name])
   const resetGame = useCallback(() => {
     const resetGameAsync = async () => {
-      if (items !== null) {
-        setState(await createState(questions));
-      }
       window.location.reload();
+      
+      
     };
 
     resetGameAsync();
