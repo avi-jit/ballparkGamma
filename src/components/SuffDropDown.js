@@ -66,8 +66,8 @@ export default function SuffDropDown(props) {
             Suffix
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark" style={{overflowY:'scroll', maxHeight:"200px"}}>
-            <Dropdown.Item as="li" className = {styles.items} variant="dark"><button onClick={selectAll}>Select All</button></Dropdown.Item>
-            <Dropdown.Item as="li" className = {styles.items} variant="dark"><button onClick={deSelectAll}>Deselect All</button></Dropdown.Item>
+            <Dropdown.Item as="li" className = {styles.items} variant="dark"><button className='btn btn-secondary rounded-pill' onClick={selectAll}>Select All</button></Dropdown.Item>
+            <Dropdown.Item as="li" className = {styles.items} variant="dark"><button className='btn btn-secondary rounded-pill' onClick={deSelectAll}>Deselect All</button></Dropdown.Item>
               {suffList.map((suff,index) => (<Dropdown.Item as="li" className = {styles.items} variant="dark">
                 <input
                     type="checkbox"

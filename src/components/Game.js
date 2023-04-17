@@ -29,7 +29,7 @@ export default function Game() {
   const [joiningRoom, setJoiningRoom] = useState(false);
   //const [joinedRoom, setJoinedRoom] = useState(false);
   const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany','Age',
-  'Calorie burnt',
+  'Calories',
   'Cost',
   'Event',
   'Height',
@@ -414,8 +414,8 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if(joiningRoom){
     return(
       <>
-      <h2 style={{color:"white", textTransform: "uppercase",fontStyle: "italic",marginTop:"20px"}}>Place the cards on the numberline in the correct order.</h2>
-      <h2 style={{color:"white", textTransform: "uppercase",fontStyle: "italic"}}>Multiplayer</h2>
+      <h2 style={{color:"white", textTransform: "uppercase",marginTop:"20px"}}>Place the cards on the numberline in the correct order.</h2>
+      <h2 style={{color:"white", textTransform: "uppercase"}}>Multiplayer</h2>
       <div style={{width:"70%", margin:"auto"}}>
         <div className="input-group mb-3">
         <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
@@ -511,7 +511,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       <br />
       <br />
 
-      <h3 style={{color:"white", textTransform: "uppercase",fontStyle: "italic", marginTop:"5px", marginBottom:"5px"}}>----Multiplayer----</h3>
+      <h3 style={{color:"white", textTransform: "uppercase", marginTop:"5px", marginBottom:"5px"}}>----Multiplayer----</h3>
       <div style={{width:"70%", margin:"auto"}}>
         <div className="input-group mb-3">
         <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
@@ -535,6 +535,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   }
 
   return (
+    <>
     <Board
       highscore={highscore}
       state={state}
@@ -544,5 +545,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       createdRoom = {createdRoom}
       name = {name}
     />
+    <button className="btn btn-secondary rounded-pill" onClick={()=>{window.location.reload()}}>Reset Cards</button>
+    </>
   );
 }
