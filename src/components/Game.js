@@ -211,9 +211,18 @@ export default function Game() {
     }
     setQuestions(arrNew);
   }
-  const settingSuffixques = async ()=>{
+  
     
+  
+  const startGame = async()=>{
+    
+    //settingSuffixques();
     const suffs = Array.from(suffix);
+    if(suffs.length===0){
+      window.alert("Select atleast one deck.")
+      return;
+    }
+    let y = []
     const tag = suffs[Math.floor(Math.random()*suffs.length)]
     console.log(tag);
     const {data, error} = await supabase
@@ -226,23 +235,19 @@ export default function Game() {
     }
     
     if(data){
-      const x =data;
+      y =data;
      
-      setQuestions(x);
+      //setQuestions(x);
       
     }
-    
-  }
-  const startGame = ()=>{
-    settingSuffixques();
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
     for(let i=0; i<countryArr.length; i++){
       const countr = countryArr[i];
       for(let j=0; j<questions.length; j++){
-        if(questions[j].country===countr){
-          arr.push(questions[j]);
+        if(y[j].country===countr){
+          arr.push(y[j]);
           //console.log(arr[x]);
           if(arr[x].answer>9999 && arr[x].answer<999999){
             arr[x].answer = (arr[x].answer/1000).toFixed(1);
@@ -265,6 +270,7 @@ export default function Game() {
         }
       }
       setQuestions(arr);
+      
       console.log(questions);
     }
     setStarted(true);
@@ -290,17 +296,40 @@ export default function Game() {
       return;
     }
     localStorage.setItem("username",name);
+    
+    const suffs = Array.from(suffix);
+    if(suffs.length===0){
+      window.alert("Select atleast one deck.")
+      return;
+    }
     setPlayed(false);
     setCreate(true);
-    settingSuffixques();
+    let y = []
+    const tag = suffs[Math.floor(Math.random()*suffs.length)]
+    console.log(tag);
+    const {data, error} = await supabase
+    .from('ourWorld')
+    .select('*').eq('suffix',tag);
+
+    if(error){
+        console.log("error")
+        
+    }
+    
+    if(data){
+      y =data;
+     
+      //setQuestions(x);
+      
+    }
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
     for(let i=0; i<countryArr.length; i++){
       const countr = countryArr[i];
-      for(let j=0; j<questions.length; j++){
-        if(questions[j].country===countr){
-          arr.push(questions[j]);
+      for(let j=0; j<y.length; j++){
+        if(y[j].country===countr){
+          arr.push(y[j]);
           //console.log(arr[x]);
           if(arr[x].answer>9999 && arr[x].answer<999999){
             arr[x].answer = (arr[x].answer/1000).toFixed(1);

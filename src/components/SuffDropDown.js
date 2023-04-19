@@ -63,7 +63,7 @@ export default function SuffDropDown(props) {
         
           <Dropdown className={styles.dropDown} autoClose="outside">
             <Dropdown.Toggle id="dropdown-autoclose-outside" className="mt-2" style={{backgroundColor:"#006699"}}>
-            Suffix
+            Decks
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark" style={{overflowY:'scroll', maxHeight:"200px"}}>
             <Dropdown.Item as="li" className = {styles.items} variant="dark"><button className='btn btn-secondary rounded-pill' onClick={selectAll}>Select All</button></Dropdown.Item>
