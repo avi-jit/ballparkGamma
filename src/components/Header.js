@@ -70,6 +70,10 @@ function Header() {
     setAnchorElNav(null);
     show();
   };
+  const handleCloseAboutMenu = () => {
+    setAnchorElNav(null);
+    show();
+  };
   const handleHomeCloseNavMenu = () => {
     setAnchorElNav(null);
     window.location.reload();
@@ -135,7 +139,7 @@ function Header() {
                 <MenuItem key={1} onClick={handleHomeCloseNavMenu}>
                   <Typography textAlign="center" href="/">Home</Typography>
                 </MenuItem>
-                <MenuItem key={2} onClick={handleCloseNavMenu}>
+                <MenuItem key={2} onClick={handleCloseAboutMenu}>
                   <Typography textAlign="center" href="/">About</Typography>
                 </MenuItem>
                 <MenuItem key={3} onClick={handleSoundMenu}>
@@ -175,7 +179,7 @@ function Header() {
               </Button>
               <Button
                 key={2}
-                onClick={handleCloseNavMenu}
+                onClick={handleCloseAboutMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 About
