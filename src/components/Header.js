@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
+import Switch from '@material-ui/core/Switch';
 
 import Rodal from 'rodal';
 
@@ -31,8 +32,26 @@ const darkTheme = createTheme({
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [visible,setVisible] = React.useState(false);
+  const [isSoundOn,setIsSoundOn] = React.useState(true);
   
-
+  React.useEffect(()=>{
+    const SoundSwitch=()=>{
+      if(localStorage.getItem("isSoundOn")===null){
+        setIsSoundOn(true);
+      }
+      if(localStorage.getItem("isSoundOn")==="true"){
+        setIsSoundOn(true);
+      }
+      if(localStorage.getItem("isSoundOn")==="false"){
+        setIsSoundOn(false);
+      }
+    }
+    SoundSwitch();
+  },[setIsSoundOn])
+  const handleSoundToggle = ()=>{
+    setIsSoundOn(!isSoundOn);
+    localStorage.setItem("isSoundOn",!isSoundOn);
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -116,6 +135,10 @@ function Header() {
                 <MenuItem key={2} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center" href="/">About</Typography>
                 </MenuItem>
+                <MenuItem key={3} >
+                  <Typography textAlign="center" href="/">Sound
+                <Switch id='sound-toggle' checked={isSoundOn} onChange={handleSoundToggle} color='secondary'/> </Typography>
+                </MenuItem>
               
             </Menu>
           </Box>
@@ -153,6 +176,15 @@ function Header() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 About
+              </Button>
+              <Button
+                key={3}
+                
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Sound
+                <Switch id='sound-toggle' checked={isSoundOn} onChange={handleSoundToggle} color='secondary'/>
+                 
               </Button>
             
           </Box>

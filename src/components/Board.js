@@ -65,13 +65,17 @@ export default function Board(props) {
         item,
         destination.index
       );
-      if(correct){
-        var audio = new Audio("audio/wrong-answer-129254.mp3");
-        audio.play();
-      }
-      if(!correct){
-        var audio1 = new Audio("audio/wrong-answer-126515.mp3");
-        audio1.play();
+      console.log(localStorage.getItem('isSoundOn'));
+      if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
+        console.log(localStorage.getItem('isSoundOn'))
+        if(correct){
+          var audio = new Audio("audio/wrong-answer-129254.mp3");
+          audio.play();
+        }
+        if(!correct){
+          var audio1 = new Audio("audio/wrong-answer-126515.mp3");
+          audio1.play();
+        }
       }
       newPlayed.splice(destination.index, 0, {
         ...state.next,
