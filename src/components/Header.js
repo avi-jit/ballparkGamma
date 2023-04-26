@@ -52,6 +52,9 @@ function Header() {
     setIsSoundOn(!isSoundOn);
     localStorage.setItem("isSoundOn",!isSoundOn);
   };
+  const handleSoundMenu = ()=>{
+    //console.log(isSoundOn)
+  }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -135,7 +138,7 @@ function Header() {
                 <MenuItem key={2} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center" href="/">About</Typography>
                 </MenuItem>
-                <MenuItem key={3} onClick={handleHomeCloseNavMenu}>
+                <MenuItem key={3} onClick={handleSoundMenu}>
                   <Typography textAlign="center" href="/">Sound
                 <Switch id='sound-toggle' checked={isSoundOn} onChange={handleSoundToggle} color='secondary'/> </Typography>
                 </MenuItem>
