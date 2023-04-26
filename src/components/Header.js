@@ -135,7 +135,7 @@ function Header() {
                 <MenuItem key={2} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center" href="/">About</Typography>
                 </MenuItem>
-                <MenuItem key={3} >
+                <MenuItem key={3} onClick={handleHomeCloseNavMenu}>
                   <Typography textAlign="center" href="/">Sound
                 <Switch id='sound-toggle' checked={isSoundOn} onChange={handleSoundToggle} color='secondary'/> </Typography>
                 </MenuItem>
