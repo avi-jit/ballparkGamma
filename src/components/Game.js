@@ -218,6 +218,7 @@ export default function Game() {
     
     //settingSuffixques();
     const suffs = Array.from(suffix);
+    console.log(suffs.length)
     if(suffs.length===0){
       window.alert("Select atleast one deck.")
       return;
