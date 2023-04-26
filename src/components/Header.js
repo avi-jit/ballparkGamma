@@ -68,7 +68,7 @@ function Header() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-    show();
+    
   };
   const handleCloseAboutMenu = () => {
     setAnchorElNav(null);
