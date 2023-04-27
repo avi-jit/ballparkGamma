@@ -17,6 +17,7 @@ import Button from "./Button";
 import SuffDropDown from "./SuffDropDown";
 
 export default function Game() {
+  const [audio] = useState(new Audio('audio/Only the Braves - FiftySounds.mp3'))
   const [state, setState] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [started, setStarted] = useState(false);
@@ -151,7 +152,7 @@ export default function Game() {
         deleteGmae(localStorage.getItem("toDelete"))
       }
     }
-
+    
     fetchGameData();
     fetchQuestion();
     deletion();
@@ -215,6 +216,13 @@ export default function Game() {
     
   
   const startGame = async()=>{
+    if(localStorage.getItem('isMusicOn')===null||localStorage.getItem('isMusicOn')==="true"){
+        
+        
+      audio.loop = true;
+      audio.play();
+    
+  }
     
     //settingSuffixques();
     const suffs = Array.from(suffix);
