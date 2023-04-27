@@ -123,8 +123,8 @@ export default function Board(props) {
       if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
         
         
-          var audio1 = new Audio("audio/sfx-defeat.mp3");
-          audio1.play();
+          var audio2 = new Audio("audio/sfx-defeat.mp3");
+          audio2.play();
         
       }
       if(createdRoom){
