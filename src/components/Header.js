@@ -34,7 +34,7 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [visible,setVisible] = React.useState(false);
   const [isSoundOn,setIsSoundOn] = React.useState(true);
-  const [isMusicOn,setIsMusicOn] = React.useState(true);
+  const [isMusicOn,setIsMusicOn] = React.useState(false);
   
   
   React.useEffect(()=>{
@@ -50,19 +50,9 @@ function Header() {
         setIsSoundOn(false);
       }
     }
-    const MusicSwitch=()=>{
-      if(localStorage.getItem("isMusicOn")===null){
-        setIsMusicOn(true);
-      }
-      if(localStorage.getItem("isMusicOn")==="true"){
-        setIsMusicOn(true);
-      }
-      if(localStorage.getItem("isMusicOn")==="false"){
-        setIsMusicOn(false);
-      }
-    }
+    
     SoundSwitch();
-    MusicSwitch();
+    
     
   },[setIsSoundOn,setIsMusicOn])
   const handleSoundToggle = ()=>{
