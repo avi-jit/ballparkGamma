@@ -220,7 +220,7 @@ export default function Game() {
         
         
       audio.loop = true;
-      audio.play();
+      //audio.play();
     
   }
     
