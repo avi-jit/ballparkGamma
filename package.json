@@ -20,6 +20,7 @@
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.3.4",
     "react-scripts": "5.0.1",
+    "react-sound": "^1.2.0",
     "react-spring": "^9.7.1",
     "rodal": "^1.8.3",
     "sass": "^5.0.0",

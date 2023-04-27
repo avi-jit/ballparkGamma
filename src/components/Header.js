@@ -1,4 +1,5 @@
 import * as React from 'react';
+import  Sound from 'react-sound';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -35,7 +36,9 @@ function Header() {
   const [isSoundOn,setIsSoundOn] = React.useState(true);
   const [isMusicOn,setIsMusicOn] = React.useState(true);
   
+  
   React.useEffect(()=>{
+    
     const SoundSwitch=()=>{
       if(localStorage.getItem("isSoundOn")===null){
         setIsSoundOn(true);
@@ -60,6 +63,7 @@ function Header() {
     }
     SoundSwitch();
     MusicSwitch();
+    
   },[setIsSoundOn,setIsMusicOn])
   const handleSoundToggle = ()=>{
     setIsSoundOn(!isSoundOn);
@@ -166,6 +170,7 @@ function Header() {
                 <MenuItem key={4} onClick={handleSoundMenu}>
                   <Typography textAlign="center" href="/">Music
                 <Switch id='Music-toggle' checked={isMusicOn} onChange={handleMusicToggle} color='secondary'/> </Typography>
+                <Sound url={'audio/Only the Braves - FiftySounds.mp3'} playStatus={isMusicOn ? Sound.status.PLAYING : Sound.status.STOPPED} loop={true}/>
                 </MenuItem>
               
             </Menu>
@@ -221,7 +226,7 @@ function Header() {
               >
                 Music
                 <Switch id='Music-toggle' checked={isMusicOn} onChange={handleMusicToggle} color='secondary'/>
-                 
+                <Sound url={'audio/Only the Braves - FiftySounds.mp3'} playStatus={isMusicOn?Sound.status.PLAYING:Sound.status.STOPPED} loop={true}/>
               </Button>
             
           </Box>
