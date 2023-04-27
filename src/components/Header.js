@@ -33,6 +33,7 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [visible,setVisible] = React.useState(false);
   const [isSoundOn,setIsSoundOn] = React.useState(true);
+  const [isMusicOn,setIsMusicOn] = React.useState(true);
   
   React.useEffect(()=>{
     const SoundSwitch=()=>{
@@ -46,11 +47,27 @@ function Header() {
         setIsSoundOn(false);
       }
     }
+    const MusicSwitch=()=>{
+      if(localStorage.getItem("isMusicOn")===null){
+        setIsMusicOn(true);
+      }
+      if(localStorage.getItem("isMusicOn")==="true"){
+        setIsMusicOn(true);
+      }
+      if(localStorage.getItem("isMusicOn")==="false"){
+        setIsMusicOn(false);
+      }
+    }
     SoundSwitch();
-  },[setIsSoundOn])
+    MusicSwitch();
+  },[setIsSoundOn,setIsMusicOn])
   const handleSoundToggle = ()=>{
     setIsSoundOn(!isSoundOn);
     localStorage.setItem("isSoundOn",!isSoundOn);
+  };
+  const handleMusicToggle = ()=>{
+    setIsMusicOn(!isMusicOn);
+    localStorage.setItem("isMusicOn",!isMusicOn);
   };
   const handleSoundMenu = ()=>{
     //console.log(isSoundOn)
@@ -146,6 +163,10 @@ function Header() {
                   <Typography textAlign="center" href="/">Sound
                 <Switch id='sound-toggle' checked={isSoundOn} onChange={handleSoundToggle} color='secondary'/> </Typography>
                 </MenuItem>
+                <MenuItem key={4} onClick={handleSoundMenu}>
+                  <Typography textAlign="center" href="/">Music
+                <Switch id='Music-toggle' checked={isMusicOn} onChange={handleMusicToggle} color='secondary'/> </Typography>
+                </MenuItem>
               
             </Menu>
           </Box>
@@ -191,6 +212,15 @@ function Header() {
               >
                 Sound
                 <Switch id='sound-toggle' checked={isSoundOn} onChange={handleSoundToggle} color='secondary'/>
+                 
+              </Button>
+              <Button
+                key={4}
+                
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Music
+                <Switch id='Music-toggle' checked={isMusicOn} onChange={handleMusicToggle} color='secondary'/>
                  
               </Button>
             

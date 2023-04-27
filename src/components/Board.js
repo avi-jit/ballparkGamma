@@ -120,6 +120,13 @@ export default function Board(props) {
       });
     }
     if(state.lives===0){
+      if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
+        
+        
+          var audio1 = new Audio("audio/sfx-defeat.mp3");
+          audio1.play();
+        
+      }
       if(createdRoom){
         setSupabaseScore(name,score,createdRoom);
       }
