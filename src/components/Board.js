@@ -122,9 +122,20 @@ export default function Board(props) {
     if(state.lives===0){
       if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
         
-        
-          var audio2 = new Audio("audio/sfx-defeat.mp3");
-          audio2.play();
+          console.log("defeat");
+          if(score<5){
+            var audio2 = new Audio("audio/sfx-defeat6.mp3");
+            audio2.play();
+          }
+          else if(score<10){
+            var audio3= new Audio("audio/level-win-6416.mp3");
+            audio3.play();
+          }
+          else if(score>=10){
+            var audio4= new Audio("audio/crowd-cheer-ii-6263.mp3");
+            audio4.play();
+          }
+          
         
       }
       if(createdRoom){
@@ -158,6 +169,7 @@ export default function Board(props) {
     }
   }, [score, highscore, updateHighscore]);
   return (
+    <>
     <DragDropContext
       onDragEnd={onDragEnd}
       onDragStart={onDragStart}
@@ -180,6 +192,7 @@ export default function Board(props) {
           {state.lives > 0 ? (
             <>
               <NextItemList next={state.next} />
+              <button className="btn btn-secondary rounded-pill" onClick={()=>{window.location.reload()}}>Reset Cards</button>
             </>
           ) : (
             <>{
@@ -205,5 +218,6 @@ export default function Board(props) {
         </div>
       </div>
     </DragDropContext>
+    </>
   );
 }

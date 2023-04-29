@@ -582,7 +582,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       createdRoom = {createdRoom}
       name = {name}
     />
-    <button className="btn btn-secondary rounded-pill" onClick={()=>{window.location.reload()}}>Reset Cards</button>
+    
     </>
   );
 }
