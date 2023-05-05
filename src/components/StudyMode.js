@@ -75,7 +75,7 @@ const StudyMode = () => {
       ) : (
         <div>
           <h2 style={{color:"white"}}>Login/Signup</h2>
-          <button className="btn btn-secondary rounded-pill" onClick={handleLogin}>Login</button>
+          <button className="btn btn-secondary rounded-pill" onClick={handleLogin}>Login with Google</button>
         <br />
         </div>
       )}

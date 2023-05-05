@@ -22,9 +22,9 @@ export default function StudyBoard(props) {
     navigator.vibrate(20);
   }
   async function updateBestScore(dict){
-    dict['playedList'][keys]['bestScore'] = score;
+    dict['playedList'][keys]['bestScore'] = Math.max(score,dict['playedList'][keys]['bestScore']);
     console.log(correctness,state.played.length);
-    dict['playedList'][keys]['correct'] = (correctness/state.played.length)*100;
+    dict['playedList'][keys]['correct'] = Math.max((correctness/state.played.length)*100,dict['playedList'][keys]['correct']);
     const {data,error} = await supabase.from('userQuestions').update({'playedList':dict['playedList']}).eq('email',email).select();
     console.log(data);
     console.log(error);
