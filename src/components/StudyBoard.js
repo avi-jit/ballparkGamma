@@ -24,7 +24,7 @@ export default function StudyBoard(props) {
   async function updateBestScore(dict){
     dict['playedList'][keys]['bestScore'] = Math.max(score,dict['playedList'][keys]['bestScore']);
     console.log(correctness,state.played.length);
-    dict['playedList'][keys]['correct'] = Math.max((correctness/state.played.length)*100,dict['playedList'][keys]['correct']);
+    dict['playedList'][keys]['correct'] = Math.max(Math.floor((correctness/state.played.length)*100),dict['playedList'][keys]['correct']);
     const {data,error} = await supabase.from('userQuestions').update({'playedList':dict['playedList']}).eq('email',email).select();
     console.log(data);
     console.log(error);
