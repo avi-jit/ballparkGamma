@@ -463,7 +463,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     return(
       <>
       <StudyMode/>
-      <button className="btn btn-secondary" onClick={studySetter}>Back</button>
+      <button className="btn btn-secondary mt-2 rounded-pill" onClick={studySetter}>Back to Game</button>
       </>
     )
   }
