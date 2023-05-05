@@ -15,6 +15,7 @@ import Score from "./Score";
 import Roomscores from "./Roomscores";
 import Button from "./Button";
 import SuffDropDown from "./SuffDropDown";
+import StudyMode from "./StudyMode";
 
 export default function Game() {
   const [audio] = useState(new Audio('audio/Only the Braves - FiftySounds.mp3'))
@@ -28,6 +29,7 @@ export default function Game() {
   const [played,setPlayed] = useState(false);
   const [create, setCreate] = useState(false);
   const [joiningRoom, setJoiningRoom] = useState(false);
+  const [study, setStudy] = useState(false)
   //const [joinedRoom, setJoinedRoom] = useState(false);
   const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany','Age',
   'Calories',
@@ -213,7 +215,9 @@ export default function Game() {
     setQuestions(arrNew);
   }
   
-    
+  const studySetter = ()=>{
+    setStudy(!study);
+  }
   
   const startGame = async()=>{
     if(localStorage.getItem('isMusicOn')===null||localStorage.getItem('isMusicOn')==="true"){
@@ -448,6 +452,14 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if (!loaded || state === null) {
     return <Loading />;
   }
+  if(study){
+    return(
+      <>
+      <StudyMode/>
+      <button className="btn btn-secondary" onClick={studySetter}>Back</button>
+      </>
+    )
+  }
   if(joiningRoom){
     return(
       <>
@@ -543,6 +555,8 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       <>
       
       <Instructions highscore={highscore} start={startGame} typ={"Single Player"} />
+      <br />
+      <Button onClick={studySetter} text={"Study Mode"} />
       <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
       <div ><SuffDropDown suffix={suffix} updateSuffix={updateSuffix}/></div>
       <br />
