@@ -154,10 +154,16 @@ export default function Game() {
         deleteGmae(localStorage.getItem("toDelete"))
       }
     }
+    const studysetting = ()=>{
+      if(localStorage.getItem("study")==="true"){
+        setStudy(true);
+      }
+    }
     
     fetchGameData();
     fetchQuestion();
     deletion();
+    studysetting();
     // eslint-disable-next-line
   }, []);
 
@@ -217,6 +223,7 @@ export default function Game() {
   
   const studySetter = ()=>{
     setStudy(!study);
+    localStorage.setItem("study",!study);
   }
   
   const startGame = async()=>{
