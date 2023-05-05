@@ -1,4 +1,4 @@
-const countryList = ['United States', 'China', 'United Kingdom', 'Germany', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea',
+const countryList = ["United States", 'China', 'United Kingdom', 'Germany', 'Canada', 'India', 'Japan', 'France', 'Russia', 'Italy', 'Switzerland', 'Spain', 'Sweden', 'Netherlands', 'Israel', 'United Arab Emirates', 'Saudi Arabia', 'Belgium', 'Thailand', 'Pakistan', 'Iran', 'Portugal', 'South Korea',
     'Afghanistan',
  'African Region (WHO)',
  'Albania',
@@ -225,3 +225,4 @@ const countryList = ['United States', 'China', 'United Kingdom', 'Germany', 'Can
  'Zambia',
  'Zimbabwe']
 export default countryList;
+
