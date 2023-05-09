@@ -37,6 +37,7 @@ export default function StudyBoard(props) {
     const finalResult = data[0];
 
     updateBestScore(finalResult);
+    window.alert("Progress saved");
   }
   
   async function onDragEnd(result) {
