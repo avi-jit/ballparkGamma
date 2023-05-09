@@ -8,6 +8,7 @@ const supabase = createClient('https://hpcqpvygdcpwrzoldghm.supabase.co', 'eyJhb
 const StudyMode = () => {
   const [user, setUser] = useState(null);
 
+
   useEffect(() => {
     const createUser = async ()=>{
         const {data,error}= await supabase.from('userQuestions').insert({'email':user,}).select()

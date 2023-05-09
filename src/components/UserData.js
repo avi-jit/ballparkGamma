@@ -17,6 +17,7 @@ const UserData = (props) => {
     const [ playing, setPlaying] = useState(false);
     const [questions, setQuestions] = useState(null);
     const [state, setState] = useState(null);
+    const [menu, setMenu] = useState(false);
     const [highscore, setHighscore] = useState(
         Number(localStorage.getItem("highscore") ?? "0")
       );
@@ -41,6 +42,7 @@ const UserData = (props) => {
       }, []);
     const getQuestions = async(key)=>{
         setkeys(key);
+        setMenu(true);
         const {data,error} = await supabase.from('ourWorld').select('*').eq("suffix",key);
         if(data){
             console.log(data);
@@ -73,7 +75,7 @@ const UserData = (props) => {
     const playSetter = ()=>{
         setPlaying(!playing);
     }
-    if(state && questions){
+    if(state && questions && menu){
         return (
             <>
             <StudyBoard
@@ -85,7 +87,7 @@ const UserData = (props) => {
             keys = {keys}
             email = {user}
             />
-
+            <button className="btn btn-secondary rounded-pill mt-2 mr-2"onClick={()=>{setMenu(false); setQuestions(null); setState(null)}}>Main menu</button>
             </>
         )
     }
@@ -122,7 +124,7 @@ const UserData = (props) => {
       <Divider variant="inset" component="li" />
                 </>
             ))
-        }</>):(<></>)}
+        } </>):(<></>)}
       
       
     </List>
