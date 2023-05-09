@@ -70,6 +70,7 @@ const StudyMode = () => {
       {user ? (
         <div>
           <p style={{color:"white"}}>Welcome, {user}</p>
+          <p style={{color:"white"}}>Double click on a deck to start practising.</p>
           <UserData user={user}/>
           <button className="btn btn-secondary rounded-pill mt-2"onClick={handleLogout}>Logout</button>
         </div>
