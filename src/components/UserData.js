@@ -99,7 +99,7 @@ const UserData = (props) => {
             Object.keys(userScores['playedList']).map((key,index)=>(
                 <>
                 <Grid item xs={4} sx={{justifyContent:'center'}}>
-                  <Avatar   src="/static/images/avatar/1.jpg" sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} /> <h6 style={{color:'white'}}>{key}</h6>
+                  <Avatar   src="/images/world.jpg" sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} /> <h6 style={{color:'white'}}>{key}</h6>
                  
                   
                 </Grid>
