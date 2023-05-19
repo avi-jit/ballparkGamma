@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 
 import { createClient } from '@supabase/supabase-js';
 import StudyBoard from './StudyBoard';
-import createState from "../lib/create-state";
+import createState from "../lib/create-state-beta";
 import Grid from '@mui/material/Grid';
 const supabase = createClient('https://hpcqpvygdcpwrzoldghm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwY3FwdnlnZGNwd3J6b2xkZ2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjUwMzg0NTIsImV4cCI6MTk4MDYxNDQ1Mn0.-DVUVZlZGkiylcWqO7ROJ11Y86dyHcl7ex5985WDhr8');
 
@@ -14,6 +14,8 @@ const UserData = (props) => {
     const {user} = props;
     const [keys,setkeys] = useState(null)
     const [userScores, setUserScores] = useState(null);
+    const [userQids,setUserQids] = useState(null);
+    const [userPlayed,setUserPlayed] = useState(null);
     const [ playing, setPlaying] = useState(false);
     const [questions, setQuestions] = useState(null);
     const [state, setState] = useState(null);
@@ -28,6 +30,7 @@ const UserData = (props) => {
         if(data.length!==0){
             console.log("isme chala");
             setUserScores(data[0])
+            setUserQids(data[0]['nextList'])
         }
         if(error){
             console.log(error);
@@ -47,6 +50,20 @@ const UserData = (props) => {
         if(data){
             console.log(data);
             setQuestions(data);
+            var x = []
+            var y = []
+            for(let i=0; i<data.length; i++){
+                console.log(userQids[data[i]['id']])
+                if(userQids[data[i]['id']]===0){
+                    x.push(data[i])
+                    //console.log(userQids[data[i]['id']])
+                }
+                if(userQids[data[i]['id']]===1){
+                    y.push(data[i])
+                }
+            }
+            setQuestions(x)
+            setUserPlayed(y)
         }
         if(error){
             console.log(error)
@@ -58,7 +75,7 @@ const UserData = (props) => {
     }
     const createStateAsync = async() => {
        
-          setState(await createState(questions));
+          setState(await createState(questions,userPlayed));
           console.log("working")
         
     };

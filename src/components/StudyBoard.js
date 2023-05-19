@@ -16,16 +16,21 @@ export default function StudyBoard(props) {
 
   const [isDragging, setIsDragging] = useState(false);
   const [correctness,setCorrectness] = useState(0);
+  const [ids,setIds] = useState([])
   
   async function onDragStart() {
     setIsDragging(true);
     navigator.vibrate(20);
   }
   async function updateBestScore(dict){
+    for(let i=0; i<ids.length; i++){
+      console.log(ids[i]['id'])
+      dict['nextList'][ids[i]['id']] = 1;
+    }
     dict['playedList'][keys]['bestScore'] = Math.max(score,dict['playedList'][keys]['bestScore']);
     console.log(correctness,state.played.length);
     dict['playedList'][keys]['correct'] = Math.max(Math.floor((correctness/(state.played.length-1))*100),dict['playedList'][keys]['correct']);
-    const {data,error} = await supabase.from('userQuestions').update({'playedList':dict['playedList']}).eq('email',email).select();
+    const {data,error} = await supabase.from('userQuestions').update({'playedList':dict['playedList'],'nextList':dict['nextList']}).eq('email',email).select();
     console.log(data);
     console.log(error);
   }
@@ -85,8 +90,15 @@ export default function StudyBoard(props) {
         newDeck,
         newNext ? [...newPlayed, newNext] : newPlayed
       );
+      //console.log(item)
       if(correct){
         setCorrectness(correctness+1);
+        console.log(ids)
+        var x = ids;
+        console.log(typeof x);
+        x.push(item)
+        setIds(x)
+        //console.log(item)
       }
       const newImageCache = [preloadImage(newNextButOne.image)];
 
