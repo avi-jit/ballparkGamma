@@ -27,9 +27,9 @@ export default function StudyBoard(props) {
       console.log(ids[i]['id'])
       dict['nextList'][ids[i]['id']] = 1;
     }
-    dict['playedList'][keys]['bestScore'] = Math.max(score,dict['playedList'][keys]['bestScore']);
+    dict['playedList'][keys]['bestScore'] = Math.max(ids.length,dict['playedList'][keys]['bestScore']);
     console.log(correctness,state.played.length);
-    dict['playedList'][keys]['correct'] = Math.max(Math.floor((correctness/(state.played.length-1))*100),dict['playedList'][keys]['correct']);
+    //dict['playedList'][keys]['correct'] = Math.max(Math.floor((correctness/(state.played.length-1))*100),dict['playedList'][keys]['correct']);
     const {data,error} = await supabase.from('userQuestions').update({'playedList':dict['playedList'],'nextList':dict['nextList']}).eq('email',email).select();
     console.log(data);
     console.log(error);
