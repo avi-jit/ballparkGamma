@@ -117,9 +117,9 @@ const UserData = (props) => {
                 <>
                 <Grid item xs={4} sx={{justifyContent:'center'}}>
                   <Avatar   src="/images/world.jpg" sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />
-                  {userScores['playedList'][key][bestScore]/userScores['playedList'][key][correct]<=0.4?(<><h6 style={{color:'red'}}>{key}</h6></>)
+                  {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><h6 style={{color:'red'}}>{key}</h6></>)
                   :
-                  (<>{userScores['playedList'][key][bestScore]/userScores['playedList'][key][correct]<=0.8?(<h6 style={{color:'orange'}}>{key}</h6>):(
+                  (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<h6 style={{color:'orange'}}>{key}</h6>):(
                     <h6 style={{color:'green'}}>{key}</h6>
                   )}</>)
                   }
