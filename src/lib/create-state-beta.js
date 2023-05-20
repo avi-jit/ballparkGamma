@@ -9,6 +9,9 @@ export default async function createState(deck,alreadyPlayed) {
   for(let i =0; i<alreadyPlayed.length; i++){
     played.push({...alreadyPlayed[i],played: { correct: true }})
   }
+  played.sort(function(a,b){
+    return a.answer-b.answer
+  })
   const next = getRandomItem(deck, played);
   const nextButOne = getRandomItem(deck, [...played, next]);
   const imageCache = [preloadImage(next.image), preloadImage(nextButOne.image)];
