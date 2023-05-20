@@ -123,7 +123,7 @@ const UserData = (props) => {
                     <h6 style={{color:'green'}}>{key}</h6>
                   )}</>)
                   }
-                  <h6 style={{color:'white'}}>{key}</h6>
+                  
                  
                   
                 </Grid>
