@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Avatar from '@mui/material/Avatar';
 
 
-
+import imageList from '../lib/imageList';
 import { createClient } from '@supabase/supabase-js';
 import StudyBoard from './StudyBoard';
 import createState from "../lib/create-state-beta";
@@ -116,7 +116,7 @@ const UserData = (props) => {
             Object.keys(userScores['playedList']).map((key,index)=>(
                 <>
                 <Grid item xs={4} sx={{justifyContent:'center'}}>
-                  <Avatar   src="/images/world.jpg" sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />
+                  <Avatar   src={imageList[index]} sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />
                   {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><h6 style={{color:'red'}}>{key}</h6></>)
                   :
                   (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<h6 style={{color:'orange'}}>{key}</h6>):(
