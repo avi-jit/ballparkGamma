@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import Avatar from '@mui/material/Avatar';
+//import Avatar from '@mui/material/Avatar';
 
-
+import {Card} from  'antd';
 import imageList from '../lib/imageList';
 import { createClient } from '@supabase/supabase-js';
 import StudyBoard from './StudyBoard';
 import createState from "../lib/create-state-beta";
 import Grid from '@mui/material/Grid';
-const supabase = createClient('https://hpcqpvygdcpwrzoldghm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwY3FwdnlnZGNwd3J6b2xkZ2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjUwMzg0NTIsImV4cCI6MTk4MDYxNDQ1Mn0.-DVUVZlZGkiylcWqO7ROJ11Y86dyHcl7ex5985WDhr8');
 
+const supabase = createClient('https://hpcqpvygdcpwrzoldghm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwY3FwdnlnZGNwd3J6b2xkZ2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjUwMzg0NTIsImV4cCI6MTk4MDYxNDQ1Mn0.-DVUVZlZGkiylcWqO7ROJ11Y86dyHcl7ex5985WDhr8');
+const {Meta} = Card;
 const UserData = (props) => {
     const {user} = props;
     const [keys,setkeys] = useState(null)
@@ -111,18 +112,27 @@ const UserData = (props) => {
   return (
     <>
         {userScores?(
+            <>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}sx={{justifyContent:'center'}}>
         {
             Object.keys(userScores['playedList']).map((key,index)=>(
                 <>
-                <Grid item xs={4} sx={{justifyContent:'center'}}>
-                  <Avatar   src={imageList[index]} sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />
-                  {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><h6 style={{color:'red'}}>{key}</h6></>)
+                <Grid item xs={1} sm={2} md={1}  sx={{justifyContent:'center'}}>
+                {/*<Avatar   src={imageList[index]} sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />*/}
+                <Card
+                hoverable
+                style={{width:120}}
+                onClick={()=>getQuestions(key)}
+                cover = {<img alt="example" src={imageList[index]} style={{height:100}}/>}
+                >
+                    <Meta title={userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><h6 style={{color:'red'}}>{key}</h6></>)
                   :
                   (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<h6 style={{color:'orange'}}>{key}</h6>):(
                     <h6 style={{color:'green'}}>{key}</h6>
                   )}</>)
-                  }
+                  } description={[<div style={{color:'red'}}>{userScores['playedList'][key]['correct']}</div>]} style={{color:'red'}}/>
+                </Card>
+                  
                   
                  
                   
@@ -135,7 +145,9 @@ const UserData = (props) => {
       
                 </>
             ))
-        } </Grid>):(<></>)}
+        } </Grid>
+       
+        </>):(<></>)}
       
       
     </>
