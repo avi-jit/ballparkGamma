@@ -45,6 +45,10 @@ const UserData = (props) => {
         localStorage.setItem("highscore", String(score));
         setHighscore(score);
       }, []);
+    const getQuestion = (key)=>{
+        getQuestions(key)
+        getQuestions(key)
+    }
     const getQuestions = async(key)=>{
         setkeys(key);
         setMenu(true);
@@ -114,22 +118,22 @@ const UserData = (props) => {
     <>
         {userScores?(
             <div style={{justifyContent:'center',margin:"auto"}}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}sx={{justifyContent:'center',margin:"auto"}}>
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 3 }}sx={{justifyContent:'center',margin:"auto"}}>
         {
             Object.keys(userScores['playedList']).map((key,index)=>(
                 <>
-                <Grid item xs={4} sm={2} md={1}  sx={{justifyContent:'center'}}>
+                <Grid item xs={4} sm={2} md={1}  >
                 {/*<Avatar   src={imageList[index]} sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />*/}
                 <Card
                 hoverable
                 style={{ leftMargin:"2px"}}
-                onClick={()=>getQuestions(key)}
+                onClick={()=>getQuestion(key)}
                 cover = {<img alt="example" src={imageList[index]} style={{height:100}}/>}
                 >
-                    <Meta description={userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><h6 style={{color:'red'}}>{studySuff[key]}</h6></>)
+                    <Meta description={userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
                   :
-                  (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<h6 style={{color:'orange'}}>{studySuff[key]}</h6>):(
-                    <h6 style={{color:'green'}}>{studySuff[key]}</h6>
+                  (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<p style={{color:'orange'}}>{studySuff[key]}</p>):(
+                    <p style={{color:'green'}}>{studySuff[key]}</p>
                   )}</>)
                   }  style={{color:'red'}}/>
                 </Card>
