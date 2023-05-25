@@ -8,6 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 import StudyBoard from './StudyBoard';
 import createState from "../lib/create-state-beta";
 import Grid from '@mui/material/Grid';
+import studySuff from '../lib/studySuff';
 
 const supabase = createClient('https://hpcqpvygdcpwrzoldghm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwY3FwdnlnZGNwd3J6b2xkZ2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjUwMzg0NTIsImV4cCI6MTk4MDYxNDQ1Mn0.-DVUVZlZGkiylcWqO7ROJ11Y86dyHcl7ex5985WDhr8');
 const {Meta} = Card;
@@ -125,12 +126,12 @@ const UserData = (props) => {
                 onClick={()=>getQuestions(key)}
                 cover = {<img alt="example" src={imageList[index]} style={{height:100}}/>}
                 >
-                    <Meta title={userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><h6 style={{color:'red'}}>{key}</h6></>)
+                    <Meta description={userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><h6 style={{color:'red'}}>{studySuff[key]}</h6></>)
                   :
-                  (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<h6 style={{color:'orange'}}>{key}</h6>):(
-                    <h6 style={{color:'green'}}>{key}</h6>
+                  (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<h6 style={{color:'orange'}}>{studySuff[key]}</h6>):(
+                    <h6 style={{color:'green'}}>{studySuff[key]}</h6>
                   )}</>)
-                  } description={[<div style={{color:'red'}}>{userScores['playedList'][key]['correct']}</div>]} style={{color:'red'}}/>
+                  }  style={{color:'red'}}/>
                 </Card>
                   
                   
