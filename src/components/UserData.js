@@ -117,8 +117,8 @@ const UserData = (props) => {
   return (
     <>
         {userScores?(
-            <div style={{justifyContent:'center',margin:"auto"}}>
-        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 3 }}sx={{justifyContent:'center',margin:"auto"}}>
+            <div style={{justifyContent:'center',margin:"15px"}}>
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 3 }}sx={{justifyContent:'center',margin:"3px"}}>
         {
             Object.keys(userScores['playedList']).map((key,index)=>(
                 <>
@@ -130,6 +130,7 @@ const UserData = (props) => {
                 onClick={()=>getQuestion(key)}
                 cover = {<img alt="example" src={imageList[index]} style={{height:100}}/>}
                 >
+                    
                     <Meta description={userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
                   :
                   (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<p style={{color:'orange'}}>{studySuff[key]}</p>):(
