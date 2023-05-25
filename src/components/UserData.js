@@ -112,16 +112,16 @@ const UserData = (props) => {
   return (
     <>
         {userScores?(
-            <>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}sx={{justifyContent:'center'}}>
+            <div style={{justifyContent:'center',margin:"auto"}}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}sx={{justifyContent:'center',margin:"auto"}}>
         {
             Object.keys(userScores['playedList']).map((key,index)=>(
                 <>
-                <Grid item xs={1} sm={2} md={1}  sx={{justifyContent:'center'}}>
+                <Grid item xs={4} sm={2} md={1}  sx={{justifyContent:'center'}}>
                 {/*<Avatar   src={imageList[index]} sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />*/}
                 <Card
                 hoverable
-                style={{width:120}}
+                style={{ leftMargin:"2px"}}
                 onClick={()=>getQuestions(key)}
                 cover = {<img alt="example" src={imageList[index]} style={{height:100}}/>}
                 >
@@ -147,7 +147,7 @@ const UserData = (props) => {
             ))
         } </Grid>
        
-        </>):(<></>)}
+        </div>):(<></>)}
       
       
     </>
