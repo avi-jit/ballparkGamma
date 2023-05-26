@@ -73,7 +73,7 @@ const StudyMode = () => {
             <br />
           <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>
           <h4 style={{margin:"15px"}} >Welcome, {user}</h4>
-          <p style={{margin:"15px"}}>Double click on a deck to start practising.</p>
+          
           </div>
           <img src="/images/studyMode.webp" alt="h" style={{textAlign:"right", height:"300px" ,'@media (max-width:480px)':{height:"60px"}}} />
           <br />
