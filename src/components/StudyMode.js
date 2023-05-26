@@ -75,7 +75,7 @@ const StudyMode = () => {
           <h4 style={{margin:"15px"}} >Welcome, {user}</h4>
           
           </div>
-          <img src="/images/studyMode.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"60px"}} />
+          <img src="/images/studyMode.webp" alt="h" style={{textAlign:"right", height: window.innerWidth>480?"300px":"60px"}} />
           <br />
           </div>
           
