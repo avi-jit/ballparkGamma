@@ -68,9 +68,17 @@ const StudyMode = () => {
   return (
     <div>
       {user ? (
-        <div>
-          <p style={{color:"white"}}>Welcome, {user}</p>
-          <p style={{color:"white"}}>Double click on a deck to start practising.</p>
+        <div >
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
+            <br />
+          <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>
+          <h4 style={{margin:"15px"}} >Welcome, {user}</h4>
+          <p style={{margin:"15px"}}>Double click on a deck to start practising.</p>
+          </div>
+          <img src="/images/studyMode.webp" alt="h" style={{textAlign:"right", height:"300px" ,'@media (max-width:480px)':{height:"60px"}}} />
+          <br />
+          </div>
+          
           <UserData user={user}/>
           <button className="btn btn-secondary rounded-pill mt-2"onClick={handleLogout}>Logout</button>
         </div>
