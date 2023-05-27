@@ -543,7 +543,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
 
       {screenWidth>480?
       (<>
-      <div style={{display:"flex", margin:"15px"}}>
+      <div style={{display:"flex", margin:"8px"}}>
         <div>
           <Button onClick={startGameBeta} text={"Start Game"} />
         </div>
@@ -561,7 +561,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       </div>
       </>):
       (<>
-      <div style={{display:"flex", alignItems:"center", margin:"15px"}}>
+      <div style={{display:"flex", alignItems:"center", margin:"8px"}}>
         <div>
           <Button onClick={startGameBeta} text={"Start Game"} />
         </div>
@@ -572,7 +572,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
         
         
       </div>
-      <div style={{display:"flex", alignItems:"center", margin:"15px"}}>
+      <div style={{display:"flex", alignItems:"center", margin:"8px"}}>
         <div style={{margin:"15px"}}>
             <Score score={localStorage.getItem("createdRoom")} title="Game code" />
           </div>
