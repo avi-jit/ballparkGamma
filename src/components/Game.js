@@ -567,7 +567,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
             <br />
           <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>
-            <h1 style={{marginLeft:screenWidth>480?"50px":"20px", fontWeight:"bold"}}>Ballpark</h1>
+            <h1 style={{marginLeft:screenWidth>480?"50px":"20px", fontWeight:screenWidth>480?"bold":"normal"}}>Ballpark</h1>
           <h4 style={{marginLeft:"50px", display:screenWidth>480?"block":"none"}} >Home</h4>
           
           </div>
