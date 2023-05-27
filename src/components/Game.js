@@ -618,11 +618,11 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
         </>
       ):(<>
-      <div style={{display:"flex"}}>
-        <div><Button onClick={startGame} text={"Single Player"} /></div>
-        <div style={{marginLeft:"0px"}}><Button onClick={studySetter} text={"Study Mode"} /></div>
+      
+        <Button onClick={startGame} text={"Single Player"} />
+        <Button onClick={studySetter} text={"Study Mode"} />
 
-      </div>
+      
       
       <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
       <div ><SuffDropDown suffix={suffix} updateSuffix={updateSuffix}/></div>
