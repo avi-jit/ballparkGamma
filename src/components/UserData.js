@@ -124,19 +124,21 @@ const UserData = (props) => {
                 <>
                 <Grid item xs={4} sm={2} md={1}  >
                 {/*<Avatar   src={imageList[index]} sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />*/}
+                
                 <Card
                 hoverable
-                style={{ leftMargin:"2px"}}
+                style={{ leftMargin:"2px",height:"208.6px"}}
                 onClick={()=>getQuestion(key)}
-                cover = {<img alt="example" src={imageList[index]} style={{height:100}}/>}
+                cover = {<img alt="example" src={imageList[index]} style={{height:"100px"}}/>}
                 >
-                    
-                    <Meta description={userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
+                
+                {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
                   :
                   (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<p style={{color:'orange'}}>{studySuff[key]}</p>):(
                     <p style={{color:'green'}}>{studySuff[key]}</p>
                   )}</>)
-                  }  style={{color:'red'}}/>
+                }
+                    {/*<Meta description=  style={{color:'red'}}/>*/}
                 </Card>
                   
                   
