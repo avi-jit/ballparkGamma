@@ -7,9 +7,13 @@ import UserData from './UserData';
 const supabase = createClient('https://hpcqpvygdcpwrzoldghm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwY3FwdnlnZGNwd3J6b2xkZ2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjUwMzg0NTIsImV4cCI6MTk4MDYxNDQ1Mn0.-DVUVZlZGkiylcWqO7ROJ11Y86dyHcl7ex5985WDhr8');
 const StudyMode = () => {
   const [user, setUser] = useState(null);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
 
   useEffect(() => {
+    function handleResize(){
+      setScreenWidth(window.innerWidth);
+    }
     const createUser = async ()=>{
         const {data,error}= await supabase.from('userQuestions').insert({'email':user,}).select()
         console.log(data);
@@ -31,6 +35,7 @@ const StudyMode = () => {
             }
         }
       }
+      window.addEventListener('resize',handleResize);
     checkUser();
     getUserData();
   }, [user]);
@@ -72,10 +77,11 @@ const StudyMode = () => {
           <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
             <br />
           <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>
-          <h4 style={{margin:"15px"}} >Welcome, {user}</h4>
+            <h2 style={{margin:"20px"}}>Study Mode</h2>
+          <h4 style={{margin:"20px", display:screenWidth>480?"block":"none"}} >Welcome, {user}</h4>
           
           </div>
-          <img src="/images/studyMode.webp" alt="h" style={{textAlign:"right", height: window.innerWidth>480?"300px":"60px"}} />
+          <img src="/images/studyMode.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"150px", margin:"20px"}} />
           <br />
           </div>
           
