@@ -90,8 +90,19 @@ const StudyMode = () => {
         </div>
       ) : (
         <div>
-          <h2 style={{color:"white"}}>Login/Signup</h2>
-          <button className="btn btn-secondary rounded-pill mt-2" onClick={handleLogin}>Login with Google</button>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
+            <br />
+          <div style={{textAlign:"left", flex:1, wordBreak:"break-word"}}>
+            <h2 style={{margin:"20px"}}>Login or Signup</h2>
+          
+          <button className="btn btn-secondary rounded-pill mt-2" onClick={handleLogin}
+          style={{margin:"20px"}}>Google</button>
+          
+          </div>
+          <img src="/images/studyMode.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"150px", margin:"20px"}} />
+          <br />
+          </div>
+          
         <br />
         </div>
       )}
