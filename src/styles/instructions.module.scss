@@ -8,14 +8,14 @@
   justify-content: center;
 
   .wrapper {
-    padding: 0 20px;
+    padding: 0 15px;
     text-align: center;
 
-    h2 {
-      color: $text-light;
+    h4 {
+      color: black;
       
-      text-transform: uppercase;
-      margin-bottom: 40px;
+      
+      margin: 20px;
     }
 
     .highscoreWrapper {

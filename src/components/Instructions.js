@@ -13,7 +13,11 @@ export default function Instructions(props) {
   return (
     <div className={styles.instructions}>
       <div className={styles.wrapper}>
-        <h2>Place the cards on the numberline in the correct order.</h2>
+        <div style={{backgroundColor:"white", borderRadius:"15px", textAlign:"left", width:"100%"}}>
+          
+            <h4 style={{marginTop:"5px", paddingTop:"10px", paddingBottom:"10px"}}>Place the cards on the numberline in the correct order.</h4>
+        </div>
+        
         
         {highscore !== 0 && (
           <div className={styles.highscoreWrapper}>
