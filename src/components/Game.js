@@ -5,7 +5,7 @@ import axios from "axios";
 import createState from "../lib/create-state";
 import Board from "./Board";
 import Loading from "./Loading";
-import Instructions from "./Instructions";
+
 //import badCards from "../lib/bad-cards";
 import supabase from "./config/supabaseClient"
 import DropDown from "./DropDown";
@@ -525,16 +525,67 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     }
     return(
       <>
-      
-      <Instructions highscore={highscore} start={startGameBeta} typ={"Start Game"} />
-      <div style={{marginTop:"20px"}}>
-      <Score score={localStorage.getItem("createdRoom")} title="Game code" />
-      <span style={{marginLeft:"5px"}}><Score score={name} title="Username" /></span>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
+            <br />
+          <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>
+            <h1 style={{marginLeft:screenWidth>480?"50px":"20px", fontWeight:"bold"}}>Multiplayer</h1>
+          <h4 style={{marginLeft:"50px", display:screenWidth>480?"block":"none"}} >Mode</h4>
+          
+          </div>
+          <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"130px", margin:"15px"}} />
+          <br />
+          </div>
+          
+            <div style={{backgroundColor:"white", borderRadius:"15px", textAlign:"left", margin:"15px"}}>
+              
+                <h4 style={{marginTop:"5px", paddingLeft:screenWidth>480?"50px":"20px",paddingTop:"10px", paddingBottom:"10px", fontWeight:"bold"}}>Place the cards on the numberline in the correct order.</h4>
       </div>
 
-      <div style={{margin:"10px"}}>
-      <Button onClick={share} text={shareText} minimal />
+      {screenWidth>480?
+      (<>
+      <div style={{display:"flex", margin:"15px"}}>
+        <div>
+          <Button onClick={startGameBeta} text={"Start Game"} />
+        </div>
+        <div style={{marginLeft:"15px"}}>
+          <Button onClick={share} text={shareText} minimal />
+        </div>
+        
+        <div style={{margin:"15px"}}>
+          <Score score={localStorage.getItem("createdRoom")} title="Game code" />
+        </div>
+        <div style={{margin:"15px"}}>
+          <Score score={name} title="Username" />
+        </div>
+        
       </div>
+      </>):
+      (<>
+      <div style={{display:"flex", alignItems:"center", margin:"15px"}}>
+        <div>
+          <Button onClick={startGameBeta} text={"Start Game"} />
+        </div>
+        <div style={{marginLeft:"15px"}}>
+          <Button onClick={share} text={shareText} minimal />
+        </div>
+        
+        
+        
+      </div>
+      <div style={{display:"flex", alignItems:"center", margin:"15px"}}>
+        <div style={{margin:"15px"}}>
+            <Score score={localStorage.getItem("createdRoom")} title="Game code" />
+          </div>
+          <div style={{margin:"15px"}}>
+            <Score score={name} title="Username" />
+          </div>
+
+      </div>
+      </>)
+      }
+      
+      
+      
       
       {create?(
         <>

@@ -131,13 +131,13 @@ const UserData = (props) => {
                 onClick={()=>getQuestion(key)}
                 cover = {<img alt="example" src={imageList[index]} style={{height:"100px"}}/>}
                 >
-                
+                <div style={{textAlign:"left"}}>
                 {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
                   :
                   (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<p style={{color:'orange'}}>{studySuff[key]}</p>):(
                     <p style={{color:'green'}}>{studySuff[key]}</p>
                   )}</>)
-                }
+                }</div>
                     {/*<Meta description=  style={{color:'red'}}/>*/}
                 </Card>
                   
