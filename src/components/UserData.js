@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 //import Avatar from '@mui/material/Avatar';
 
-import {Card} from  'antd';
+
 import imageList from '../lib/imageList';
 import { createClient } from '@supabase/supabase-js';
 import StudyBoard from './StudyBoard';
@@ -45,10 +45,7 @@ const UserData = (props) => {
         localStorage.setItem("highscore", String(score));
         setHighscore(score);
       }, []);
-    const getQuestion = (key)=>{
-        getQuestions(key)
-        getQuestions(key)
-    }
+    
     const getQuestions = async(key)=>{
         setkeys(key);
         setMenu(true);
@@ -125,22 +122,19 @@ const UserData = (props) => {
                 <Grid item xs={4} sm={2} md={1}  >
                 {/*<Avatar   src={imageList[index]} sx={{ width: 56, height: 56, display: 'inline-block' }} onClick={()=>getQuestions(key)} />*/}
                 
-                <Card
-                hoverable
-                style={{ leftMargin:"2px",height:"208.6px"}}
-                onClick={()=>getQuestion(key)}
-                cover = {<img alt="example" src={imageList[index]} style={{height:"100px"}}/>}
-                >
-                <div style={{textAlign:"left"}}>
+                
+                  
+                <div style={{backgroundColor:"white", borderRadius:"15px", width:"100px"}}>
+                    <img alt="example" src={imageList[index]} style={{height:"100px", maxWidth:"100%", borderRadius:"15px"}}/>
+                    <div style={{textAlign:"center", padding:"5px"}}>
                 {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
                   :
                   (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<p style={{color:'orange'}}>{studySuff[key]}</p>):(
                     <p style={{color:'green'}}>{studySuff[key]}</p>
                   )}</>)
                 }</div>
-                    {/*<Meta description=  style={{color:'red'}}/>*/}
-                </Card>
-                  
+
+                </div>
                   
                  
                   
