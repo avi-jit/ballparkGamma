@@ -30,6 +30,7 @@ export default function Game() {
   const [create, setCreate] = useState(false);
   const [joiningRoom, setJoiningRoom] = useState(false);
   const [study, setStudy] = useState(false)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   //const [joinedRoom, setJoinedRoom] = useState(false);
   const [countries, setCountries] = useState(new Set(['United States', 'China', 'United Kingdom', 'Germany','Age',
   'Calories',
@@ -79,7 +80,9 @@ export default function Game() {
     }
   //const suffList = ['%','Billion gallons','Fahrenheit','GW.h','Gigawatt-hours','MW','Megawatt-hours','Million units','Terawatt-hours','billion tons','cm','cycles','degree celcius','degree celsius','degree fahrenheit','females','houses','inches','kilo metres','km square','metres','micrograms per cubic metre','million litres','million terajoules','mm','people','thousand tons','tons','years']
   useEffect(() => {
-
+    function handleResize(){
+      setScreenWidth(window.innerWidth);
+    }
     const fetchQuestion= async ()=>{
       if(!createdRoom){
         const suffs = ['people', '%', 'US $', 'tonnes', 'years','kWh/person','AD',
@@ -159,7 +162,7 @@ export default function Game() {
         setStudy(true);
       }
     }
-    
+    window.addEventListener('resize',handleResize);
     fetchGameData();
     fetchQuestion();
     deletion();
@@ -522,6 +525,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
     }
     return(
       <>
+      
       <Instructions highscore={highscore} start={startGameBeta} typ={"Start Game"} />
       <div style={{marginTop:"20px"}}>
       <Score score={localStorage.getItem("createdRoom")} title="Game code" />
@@ -560,7 +564,16 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if (!started) {
     return (
       <>
-      
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
+            <br />
+          <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>
+            <h1 style={{marginLeft:screenWidth>480?"50px":"20px", fontWeight:"bold"}}>Ballpark</h1>
+          <h4 style={{marginLeft:"50px", display:screenWidth>480?"block":"none"}} >Home</h4>
+          
+          </div>
+          <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"150px", margin:"20px"}} />
+          <br />
+          </div>
       <Instructions highscore={highscore} start={startGame} typ={"Single Player"} />
       <br />
       <Button onClick={studySetter} text={"Study Mode"} />
