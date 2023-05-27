@@ -571,7 +571,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
           <h4 style={{marginLeft:"50px", display:screenWidth>480?"block":"none"}} >Home</h4>
           
           </div>
-          <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"150px", margin:"20px"}} />
+          <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"130px", margin:"20px"}} />
           <br />
           </div>
       <Instructions highscore={highscore} start={startGame} typ={"Single Player"} />
