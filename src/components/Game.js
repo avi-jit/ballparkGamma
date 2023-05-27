@@ -582,9 +582,48 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
         
         
       
+      {screenWidth>480?(
+        <>
+        <div style={{display:"flex"}}>
+        <div style={{margin:"15px"}} >
+          <SuffDropDown suffix={suffix} updateSuffix={updateSuffix}/>
+        </div>
+        <div style={{margin:"15px", color:"black", backgroundColor:"white", borderRadius:"15px",width:"100%"}}>
+          <h4 style={{padding:"15px", fontWeight:"bold"}}>It'll pick one deck from your selection.</h4>
+
+        </div>
+      </div>
+      <div style={{display:"flex"}}>
+        <div><Button onClick={startGame} text={"Single Player"} /></div>
+        <div style={{marginLeft:"0px"}}><Button onClick={studySetter} text={"Study Mode"} /></div>
+        <div style={{marginLeft:"0px", width:"100%"}}>
+        <div style={{backgroundColor:"white", borderRadius:"15px",margin:"15px"}}>
+      <h3 style={{color:"black", paddingTop:"15px", paddingBottom:"10px", fontWeight:"bold"}}>Multiplayer Mode</h3>
+      <div style={{width:"70%", margin:"auto"}}>
+        <div className="input-group mb-3">
+        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        
+        </div>
+    </div>
+      
+      
+      <CreateRoom questions={questions} createGame = {createGame} joiningRoom={joiningRoom} setRoom={setRoom} />
       <br />
-      <Button onClick={startGame} text={"Single Player"} />
-      <Button onClick={studySetter} text={"Study Mode"} />
+      </div>
+
+        </div>
+
+      </div>
+      
+      <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
+        </>
+      ):(<>
+      <div style={{display:"flex"}}>
+        <div><Button onClick={startGame} text={"Single Player"} /></div>
+        <div style={{marginLeft:"0px"}}><Button onClick={studySetter} text={"Study Mode"} /></div>
+
+      </div>
+      
       <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
       <div ><SuffDropDown suffix={suffix} updateSuffix={updateSuffix}/></div>
       
@@ -601,6 +640,10 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
       <CreateRoom questions={questions} createGame = {createGame} joiningRoom={joiningRoom} setRoom={setRoom} />
       <br />
       </div>
+      </>)}
+      
+      
+      
       
 
       <h6 style={{

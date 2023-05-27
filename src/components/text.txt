@@ -1,0 +1,50 @@
+ <>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
+            <br />
+          <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>
+            <h1 style={{marginLeft:screenWidth>480?"50px":"20px", fontWeight:"bold"}}>Ballpark</h1>
+          <h4 style={{marginLeft:"50px", display:screenWidth>480?"block":"none"}} >Home</h4>
+          
+          </div>
+          <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"130px", margin:"15px"}} />
+          <br />
+          </div>
+          
+            <div style={{backgroundColor:"white", borderRadius:"15px", textAlign:"left", margin:"15px"}}>
+              
+                <h4 style={{marginTop:"5px", paddingLeft:screenWidth>480?"50px":"20px",paddingTop:"10px", paddingBottom:"10px", fontWeight:"bold"}}>Place the cards on the numberline in the correct order.</h4>
+            </div>
+        
+        
+      
+      
+      <div style={{display:"flex"}}>
+        <div><Button onClick={startGame} text={"Single Player"} /></div>
+        <div style={{marginLeft:"0px"}}><Button onClick={studySetter} text={"Study Mode"} /></div>
+
+      </div>
+      
+      <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
+      <div ><SuffDropDown suffix={suffix} updateSuffix={updateSuffix}/></div>
+      
+      <div style={{backgroundColor:"white", borderRadius:"15px", margin:"15px"}}>
+      <h3 style={{color:"black", paddingTop:"15px", paddingBottom:"10px", fontWeight:"bold"}}>Multiplayer Mode</h3>
+      <div style={{width:"70%", margin:"auto"}}>
+        <div className="input-group mb-3">
+        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        
+        </div>
+    </div>
+      
+      
+      <CreateRoom questions={questions} createGame = {createGame} joiningRoom={joiningRoom} setRoom={setRoom} />
+      <br />
+      </div>
+      
+
+      <h6 style={{
+ width: '100%',
+ bottom: '0',
+ color: 'white',
+ }}>Disclaimer: Data is ChatGPT generated but is almost always correct, though sometimes outdated.</h6>
+      </>
