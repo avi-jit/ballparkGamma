@@ -574,8 +574,16 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
           <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"130px", margin:"15px"}} />
           <br />
           </div>
-      <Instructions highscore={highscore} start={startGame} typ={"Single Player"} />
+          
+            <div style={{backgroundColor:"white", borderRadius:"15px", textAlign:"left", margin:"15px"}}>
+              
+                <h4 style={{marginTop:"5px", paddingLeft:screenWidth>480?"50px":"20px",paddingTop:"10px", paddingBottom:"10px", fontWeight:"bold"}}>Place the cards on the numberline in the correct order.</h4>
+            </div>
+        
+        
+      
       <br />
+      <Button onClick={startGame} text={"Single Player"} />
       <Button onClick={studySetter} text={"Study Mode"} />
       <div style={{display:"none"}}><DropDown countries={countries} updateCountries={updateCountries}/></div>
       <div ><SuffDropDown suffix={suffix} updateSuffix={updateSuffix}/></div>

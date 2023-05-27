@@ -10,6 +10,7 @@ export default function Button(props) {
     <button
       onClick={onClick}
       className= {`${styles.button} ${minimal ? styles.minimal : ''}`}
+      style={{display:"inline"}}
     >
       {text}
     </button>

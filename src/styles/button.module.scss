@@ -1,17 +1,20 @@
 @import "./variables";
 
 .button {
+  margin:10px;
   border: none;
-  background: $primary;
-  color: $text-light;
+  background: white;
+  color: black;
   padding: 10px 24px;
-  border-radius: $button-border-radius;
+  border-radius: 15px;
   cursor: pointer;
-  text-transform: uppercase;
+  
   font-weight: 700;
-  font-style: italic;
+  
   white-space: nowrap;
-  width: 160px;
+  
+  height: 100px;
+  display: inline;
 
   &:hover {
     filter: brightness(1.3);
