@@ -26,6 +26,33 @@ const UserData = (props) => {
         Number(localStorage.getItem("highscore") ?? "0")
       );
     useEffect(()=>{
+        const getQuestio = async()=>{
+            const {data, error} = await supabase.from('ourWorld').select('*')
+            if(data){
+                setQuestions({
+                    "id": 19139,
+                    "created_at": "2023-03-11T07:19:35.616665+00:00",
+                    "question": "Cards",
+                    "answer": "Please wait",
+                    "suffix": "Please wait",
+                    "country": "Loading",
+                    "code": "none",
+                    "year": "",
+                    "url": "https://ourworldindata.org/literacy"
+                },
+                {
+                    "id": 19130,
+                    "created_at": "2023-03-11T07:19:35.616665+00:00",
+                    "question": "Cards",
+                    "answer": "Please wait",
+                    "suffix": "Please wait",
+                    "country": "Loading",
+                    "code": "none",
+                    "year": "",
+                    "url": "https://ourworldindata.org/literacy"
+                });
+            }
+        }
         const getUserScores =async()=>{
             const {data,error} = await supabase.from('userQuestions').select('*').eq("email",user);
         console.log(data);
@@ -39,8 +66,25 @@ const UserData = (props) => {
         }
 
         }
+        getQuestio();
         getUserScores();
     },[user])
+    useEffect(() => {
+        const createStateAsync = async() => {
+          
+            setState(await createState(questions,[]));
+            
+            console.log("working")
+        
+        };
+        
+       createStateAsync();
+      
+        
+        
+        // eslint-disable-next-line
+      }, [questions]);
+   
     const updateHighscore = useCallback((score) => {
         localStorage.setItem("highscore", String(score));
         setHighscore(score);
@@ -92,10 +136,14 @@ const UserData = (props) => {
         resetGameAsync();
         // eslint-disable-next-line
       }, [questions]);
+    const getQuestion = (key)=>{
+        getQuestions(key);
+        setTimeout(getQuestions(key),5000);
+    }
     const playSetter = ()=>{
         setPlaying(!playing);
     }
-    if(state && questions && menu){
+    if(state && questions && menu && playing){
         return (
             <>
             <StudyBoard
@@ -107,7 +155,7 @@ const UserData = (props) => {
             keys = {keys}
             email = {user}
             />
-            <button className="btn btn-secondary rounded-pill mt-2 mr-2"onClick={()=>{setMenu(false); setQuestions(null); setState(null)}}>Main menu</button>
+            <button className="btn btn-secondary rounded-pill mt-2 mr-2"onClick={()=>{ window.location.reload()}}>Main menu</button>
             </>
         )
     }

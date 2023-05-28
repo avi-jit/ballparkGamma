@@ -43,6 +43,26 @@ export default function StudyBoard(props) {
 
     updateBestScore(finalResult);
     window.alert("Progress saved, refresh the main-menu to see updated scores.");
+  };
+  async function resetCards(){
+    window.alert("Please refresh")
+    const {data,error} = await supabase.from('ourWorld').select('*').eq('suffix',state.played[0]['suffix'])
+    getQueIds(data);
+  }
+  async function getQueIds(dat){
+    const {data,error}= await supabase.from('userQuestions').select('*').eq('email',email);
+    let dict = data[0];
+    for(let i=0; i<dat.length; i++){
+      dict['nextList'][dat[i]['id']] = 0;
+    }
+    dict['playedList'][state.played[0]['suffix']]['bestScore'] = 0;
+    doingFinalUpdate(dict);
+  }
+  async function doingFinalUpdate(dict){
+    const {data,error} = await supabase.from('userQuestions').update({'playedList':dict['playedList'],'nextList':dict['nextList']}).eq('email',email).select();
+    console.log(data);
+    console.log(error);
+
   }
   
   async function onDragEnd(result) {
@@ -206,6 +226,7 @@ export default function StudyBoard(props) {
               <NextItemList next={state.next} />
               <br />
               <button className="btn btn-secondary rounded-pill" onClick={saveProgress}>Save progress</button>
+              <button className="btn btn-secondary rounded-pill" onClick={resetCards}>Reset Cards</button>
             
         </div>
       </div>
