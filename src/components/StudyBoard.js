@@ -46,10 +46,12 @@ export default function StudyBoard(props) {
   };
   async function resetCards(){
     window.alert("Please refresh")
+    // eslint-disable-next-line
     const {data,error} = await supabase.from('ourWorld').select('*').eq('suffix',state.played[0]['suffix'])
     getQueIds(data);
   }
   async function getQueIds(dat){
+    // eslint-disable-next-line
     const {data,error}= await supabase.from('userQuestions').select('*').eq('email',email);
     let dict = data[0];
     for(let i=0; i<dat.length; i++){
