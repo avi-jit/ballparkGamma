@@ -27,6 +27,7 @@ const UserData = (props) => {
       );
     useEffect(()=>{
         const getQuestio = async()=>{
+            // eslint-disable-next-line
             const {data, error} = await supabase.from('ourWorld').select('*')
             if(data){
                 setQuestions({
@@ -91,6 +92,7 @@ const UserData = (props) => {
       }, []);
     
     const getQuestions = async(key)=>{
+        document.getElementById("loading").style.display="block";
         setkeys(key);
         setMenu(true);
         const {data,error} = await supabase.from('ourWorld').select('*').eq("suffix",key);
@@ -136,10 +138,7 @@ const UserData = (props) => {
         resetGameAsync();
         // eslint-disable-next-line
       }, [questions]);
-    const getQuestion = (key)=>{
-        getQuestions(key);
-        setTimeout(getQuestions(key),5000);
-    }
+    
     const playSetter = ()=>{
         setPlaying(!playing);
     }
@@ -163,6 +162,7 @@ const UserData = (props) => {
     <>
         {userScores?(
             <div style={{justifyContent:'center',margin:"15px"}}>
+                <div id="loading"style={{display:"none",backgroundColor:"grey",color:"white",borderRadius:"15px", fontWeight:"bold"}}><h6 style={{padding:"10px"}}>Loading Cards...</h6></div>
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 3 }}sx={{justifyContent:'center',margin:"3px"}}>
         {
             Object.keys(userScores['playedList']).map((key,index)=>(
