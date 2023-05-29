@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import suffList from '../lib/suffList';
+import studySuff from '../lib/studySuff';
 import styles from '../styles/dropdown.module.scss'
 export default function SuffDropDown(props) {
     const {suffix,updateSuffix} = props;
@@ -73,7 +74,7 @@ export default function SuffDropDown(props) {
                     type="checkbox"
                     id={`custom-checkbox-${index}`}
                     
-                    name={suff}
+                    name={studySuff[suff]}
                     value={suff}
                     checked={checkedState[index]}
                     onChange={() => handleOnChange(index)}
