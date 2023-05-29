@@ -73,7 +73,7 @@ const UserData = (props) => {
     useEffect(() => {
         const createStateAsync = async() => {
           
-            setState(await createState(questions,[]));
+            //setState(await createState(questions,[]));
             
             console.log("working")
         
