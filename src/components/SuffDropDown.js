@@ -74,12 +74,12 @@ export default function SuffDropDown(props) {
                     type="checkbox"
                     id={`custom-checkbox-${index}`}
                     
-                    name={studySuff[suff]}
+                    name={suff}
                     value={suff}
                     checked={checkedState[index]}
                     onChange={() => handleOnChange(index)}
                   />
-                  <label htmlFor={`custom-checkbox-${index}`}>  {suff}</label></Dropdown.Item>))}
+                  <label htmlFor={`custom-checkbox-${index}`}>  {studySuff[suff]}</label></Dropdown.Item>))}
               
             </Dropdown.Menu>
           </Dropdown>
