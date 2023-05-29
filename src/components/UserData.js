@@ -70,21 +70,7 @@ const UserData = (props) => {
         getQuestio();
         getUserScores();
     },[user])
-    useEffect(() => {
-        const createStateAsync = async() => {
-          
-            //setState(await createState(questions,[]));
-            
-            console.log("working")
-        
-        };
-        
-       createStateAsync();
-      
-        
-        
-        // eslint-disable-next-line
-      }, [questions]);
+    
    
     const updateHighscore = useCallback((score) => {
         localStorage.setItem("highscore", String(score));
@@ -113,19 +99,20 @@ const UserData = (props) => {
             }
             setQuestions(x)
             setUserPlayed(y)
+            console.log(userPlayed);
         }
         if(error){
             console.log(error)
         }
         
           
-        createStateAsync();
+        createStateAsync(x,y);
         playSetter();
     }
-    const createStateAsync = async() => {
-       
-          setState(await createState(questions,userPlayed));
-          console.log("working")
+    const createStateAsync = async(x,y) => {
+        console.log("yes chal rha")
+        setState(await createState(x,y));
+          console.log("yes chal rha")
         
     };
     const resetGame = useCallback(() => {
