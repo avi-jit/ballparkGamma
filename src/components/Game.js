@@ -532,7 +532,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
           <h4 style={{marginLeft:"50px", display:screenWidth>480?"block":"none"}} >Mode</h4>
           
           </div>
-          <img src="/images/multiplayer.jpg" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"130px", margin:"15px"}} />
+          <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"130px", margin:"15px"}} />
           <br />
           </div>
           
