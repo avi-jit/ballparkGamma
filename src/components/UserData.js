@@ -159,7 +159,7 @@ const UserData = (props) => {
                 
                 
                   
-                <div style={{backgroundColor:"white", borderRadius:"15px", fontWeight:"bold", width:"100px", cursor:"pointer"}} onClick={()=>{getQuestions(key)}}>
+                <div style={{backgroundColor:"white", borderRadius:"15px", fontWeight:"normal", width:"100px", cursor:"pointer"}} onClick={()=>{getQuestions(key)}}>
                     <img alt="example" src={imageList[index]} style={{height:"100px", maxWidth:"100%", borderRadius:"15px"}}/>
                     <div style={{textAlign:"center", padding:"5px"}}>
                 {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
