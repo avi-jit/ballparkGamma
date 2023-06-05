@@ -17,6 +17,8 @@ export default function StudyBoard(props) {
   const [isDragging, setIsDragging] = useState(false);
   const [correctness,setCorrectness] = useState(state.played.length);
   const [ids,setIds] = useState([])
+  // eslint-disable-next-line
+  const [reset,setReset] = useState(false)
   
   async function onDragStart() {
     setIsDragging(true);
@@ -45,7 +47,7 @@ export default function StudyBoard(props) {
     window.alert("Progress saved, refresh the main-menu to see updated scores.");
   };
   async function resetCards(){
-    window.alert("Please refresh")
+    //window.alert("Please refresh")
     // eslint-disable-next-line
     const {data,error} = await supabase.from('ourWorld').select('*').eq('suffix',state.played[0]['suffix'])
     getQueIds(data);
@@ -62,6 +64,10 @@ export default function StudyBoard(props) {
   }
   async function doingFinalUpdate(dict){
     const {data,error} = await supabase.from('userQuestions').update({'playedList':dict['playedList'],'nextList':dict['nextList']}).eq('email',email).select();
+    if(data.length!==0){
+      setReset(true);
+      window.location.reload();
+    }
     console.log(data);
     console.log(error);
 
