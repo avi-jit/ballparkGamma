@@ -2,7 +2,7 @@ import React, { useState, useMemo, useLayoutEffect } from "react";
 import { DragDropContext} from "react-beautiful-dnd";
 import useAutoMoveSensor from "../lib/useAutoMoveSensor";
 //import { GameState } from "../types/game";
-import { checkCorrect, preloadImage, getRandomItem } from "../lib/items";
+import { checkCorrect, preloadImage} from "../lib/studyItems";
 import NextItemList from "./next-item-list";
 import PlayedItemList from "./played-item-list";
 import styles from "../styles/board.module.scss";
@@ -16,6 +16,7 @@ export default function StudyBoard(props) {
 
   const [isDragging, setIsDragging] = useState(false);
   const [correctness,setCorrectness] = useState(state.played.length);
+  const [idCorr, setIdCorr] = useState([])
   const [ids,setIds] = useState([])
   // eslint-disable-next-line
   const [reset,setReset] = useState(false)
@@ -72,7 +73,18 @@ export default function StudyBoard(props) {
     console.log(error);
 
   }
-  
+  async function setthecorrectness(correct,id){
+     // eslint-disable-next-line
+    const {data,error} = await supabase.from('userQuestions').select('*').eq('email',email);
+    let dict2 = data[0];
+    updateCorrectness(dict2,correct,id);
+  }
+  async function updateCorrectness(dict2,correct,id){
+    dict2['nextList'][id] = correct
+    console.log(dict2['nextList'][id])
+     // eslint-disable-next-line
+    const {data,error} = await supabase.from('userQuestions').update({'nextList':dict2['nextList']}).eq('email',email).select();
+  }
   async function onDragEnd(result) {
     setIsDragging(false);
 
@@ -91,11 +103,17 @@ export default function StudyBoard(props) {
     if (source.droppableId === "next" && destination.droppableId === "played") {
       const newDeck = [...state.deck];
       const newPlayed = [...state.played];
-      const { correct, delta } = checkCorrect(
+      const { correct, delta, correctness } = checkCorrect(
         newPlayed,
         item,
         destination.index
       );
+      var y = idCorr;
+      y.push(correctness);
+      setIdCorr(y);
+      console.log(idCorr);
+      console.log("correct", correctness);
+      setthecorrectness(correctness,item['id'])
       console.log(localStorage.getItem('isSoundOn'));
       if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
         console.log(localStorage.getItem('isSoundOn'))
@@ -112,14 +130,43 @@ export default function StudyBoard(props) {
         ...state.next,
         played: { correct },
       });
-
-      const newNext = state.nextButOne;
-      const newNextButOne = getRandomItem(
-        newDeck,
-        newNext ? [...newPlayed, newNext] : newPlayed
-      );
+      console.log("played",state.played.length);
+      
+      let newNext = state.nextButOne;
+      if(state.played.length===state.deck.length-2){
+        newNext = {
+          created_at: null,
+          suffix: null,
+          id: 0,
+          country:"Game ended",
+          question: "No more questions",
+          year: "this filter, Please refresh",
+          code:"none",
+          url: null,
+          answer: "bye",
+        }
+        
+      }
+      let newNextButOne = state.deck[state.played.length+1]
+      console.log(state.played.length,state.deck.length-2)
+      
+      if(state.played.length===state.deck.length-2){
+        newNextButOne = {
+          created_at: null,
+          suffix: null,
+          id: 0,
+          country:"Game ended",
+          question: "No more questions",
+          year: "this filter, Please refresh",
+          code:"none",
+          url: null,
+          answer: "bye",
+        }
+        
+      }
+      console.log(newNext,newNextButOne);
       //console.log(item)
-      if(correct){
+      if(1){
         setCorrectness(correctness+1);
         console.log(ids)
         var x = ids;
@@ -128,6 +175,7 @@ export default function StudyBoard(props) {
         setIds(x)
         //console.log(item)
       }
+      
       const newImageCache = [preloadImage(newNextButOne.image)];
 
       setState({
@@ -233,7 +281,7 @@ export default function StudyBoard(props) {
           
               <NextItemList next={state.next} />
               <br />
-              <button className="btn btn-secondary rounded-pill" onClick={saveProgress}>Save progress</button>
+              <button className="btn btn-secondary rounded-pill" style = {{display:"none"}}onClick={saveProgress}>Save progress</button>
               <button className="btn btn-secondary rounded-pill" onClick={resetCards}>Reset Cards</button>
             
         </div>

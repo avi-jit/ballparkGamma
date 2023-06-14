@@ -87,6 +87,15 @@ const UserData = (props) => {
             setQuestions(data);
             var x = []
             var y = []
+            var z = []
+            for(let j=0; j<data.length; j++){
+                data[j]['correctness'] = userQids[data[j]['id']];
+                z.push(data[j]);
+            }
+            z.sort(function(a,b){
+                return a.correctness-b.correctness;
+            });
+            console.log(z);
             for(let i=0; i<data.length; i++){
                 console.log(userQids[data[i]['id']])
                 if(userQids[data[i]['id']]===0){
@@ -97,7 +106,8 @@ const UserData = (props) => {
                     y.push(data[i])
                 }
             }
-            setQuestions(x)
+            setQuestions(z)
+            y = z[z.length-1]
             setUserPlayed(y)
             console.log(userPlayed);
         }
@@ -106,7 +116,7 @@ const UserData = (props) => {
         }
         
           
-        createStateAsync(x,y);
+        createStateAsync(z,[z[z.length-1]]);
         playSetter();
     }
     const createStateAsync = async(x,y) => {
