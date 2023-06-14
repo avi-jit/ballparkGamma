@@ -172,10 +172,10 @@ const UserData = (props) => {
                 <div style={{backgroundColor:"white", borderRadius:"15px", fontWeight:"normal", width:"100px", cursor:"pointer"}} onClick={()=>{getQuestions(key)}}>
                     <img alt="example" src={imageList[index]} style={{height:"100px", maxWidth:"100%", borderRadius:"15px"}}/>
                     <div style={{textAlign:"center", padding:"5px"}}>
-                {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'red'}}>{studySuff[key]}</p></>)
+                {userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.4?(<><p style={{color:'white'}}>{studySuff[key]}</p></>)
                   :
-                  (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<p style={{color:'orange'}}>{studySuff[key]}</p>):(
-                    <p style={{color:'green'}}>{studySuff[key]}</p>
+                  (<>{userScores['playedList'][key]['bestScore']/userScores['playedList'][key]['correct']<=0.8?(<p style={{color:'white'}}>{studySuff[key]}</p>):(
+                    <p style={{color:'white'}}>{studySuff[key]}</p>
                   )}</>)
                 }</div>
 
