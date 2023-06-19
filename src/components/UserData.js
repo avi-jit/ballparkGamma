@@ -100,7 +100,7 @@ const UserData = (props) => {
                 const diffTime = Math.abs(today - thatDay);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
                 console.log(today, thatDay, diffDays);
-                data[j]['days'] =  diffDays;
+                data[j]['days'] =  diffDays-1;
                 maxDay = Math.max(maxDay,diffDays);
                 z.push(data[j]);
             }
