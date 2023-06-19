@@ -107,7 +107,7 @@ const UserData = (props) => {
             for(let j=0; j<z.length; j++){
                 z[j]['days'] = z[j]['days']/maxDay;
                 z[j]['days'] = 1-z[j]['days'];
-                z[j]['days'] = (z[j]['days']+z[j]['correctness'])/2;
+                z[j]['days'] = ((z[j]['days']*7)+(z[j]['correctness']*3))/10;
             }
             z.sort(function(a,b){
                 return a.days-b.days;
