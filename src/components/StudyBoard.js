@@ -81,9 +81,17 @@ export default function StudyBoard(props) {
   }
   async function updateCorrectness(dict2,correct,id){
     dict2['nextList'][id] = correct
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '-' + dd + '-' + yyyy;
+    dict2['date'][id] = today;
     console.log(dict2['nextList'][id])
+    console.log(dict2['date'][id])
      // eslint-disable-next-line
-    const {data,error} = await supabase.from('userQuestions').update({'nextList':dict2['nextList']}).eq('email',email).select();
+    const {data,error} = await supabase.from('userQuestions').update({'nextList':dict2['nextList'],'date':dict2['date']}).eq('email',email).select();
   }
   async function onDragEnd(result) {
     setIsDragging(false);

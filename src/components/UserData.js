@@ -17,6 +17,7 @@ const UserData = (props) => {
     const [keys,setkeys] = useState(null)
     const [userScores, setUserScores] = useState(null);
     const [userQids,setUserQids] = useState(null);
+    const [userDates, setUserDates] = useState(null);
     const [userPlayed,setUserPlayed] = useState(null);
     const [ playing, setPlaying] = useState(false);
     const [questions, setQuestions] = useState(null);
@@ -61,6 +62,7 @@ const UserData = (props) => {
             console.log("isme chala");
             setUserScores(data[0])
             setUserQids(data[0]['nextList'])
+            setUserDates(data[0]['date'])
         }
         if(error){
             console.log(error);
@@ -82,6 +84,7 @@ const UserData = (props) => {
         setkeys(key);
         setMenu(true);
         const {data,error} = await supabase.from('ourWorld').select('*').eq("suffix",key);
+        let maxDay = 0;
         if(data){
             console.log(data);
             setQuestions(data);
@@ -90,10 +93,24 @@ const UserData = (props) => {
             var z = []
             for(let j=0; j<data.length; j++){
                 data[j]['correctness'] = userQids[data[j]['id']];
+                let day = userDates[data[j]['id']];
+                day = day.replace('/','-');
+                var today = new Date();
+                var thatDay = new Date(day);
+                const diffTime = Math.abs(today - thatDay);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                console.log(today, thatDay, diffDays);
+                data[j]['days'] =  diffDays;
+                maxDay = Math.max(maxDay,diffDays);
                 z.push(data[j]);
             }
+            for(let j=0; j<z.length; j++){
+                z[j]['days'] = z[j]['days']/maxDay;
+                z[j]['days'] = 1-z[j]['days'];
+                z[j]['days'] = (z[j]['days']+z[j]['correctness'])/2;
+            }
             z.sort(function(a,b){
-                return a.correctness-b.correctness;
+                return a.days-b.days;
             });
             console.log(z);
             for(let i=0; i<data.length; i++){
