@@ -36,8 +36,8 @@
       display:"flex";
       align-items:"center";
     }
-    .add-to-ios{
-      display:"flex";
+    .add-ios{
+      display:flex;
       align-items:"center";
     }
     
@@ -53,7 +53,7 @@
     <div class="add-to">
       <button class="add-to-btn btn btn-secondary">Install App</button>
     </div>
-    <div class="add-to-ios">
+    <div class="add-ios">
       <button class="add-to-ios-btn btn btn-secondary">Install App on ios</button>
     </div>
     <script>
@@ -92,11 +92,14 @@
           deferredPrompt = null;
         });
       });
-      const relatedApps = navigator.getInstalledRelatedApps();
-      const PWAisInstalled = relatedApps.length>0;
-      var divIOS = document.querySelector('.add-to-ios');
+      
+      var divIOS = document.querySelector('.add-ios');
+      console.log(divIOS);
       console.log(window.navigator.userAgent.indexOf("Mac"));
-      if(PWAisInstalled || window.navigator.userAgent.indexOf("Mac")===-1){
+      if(window.navigator.userAgent.indexOf("Mac")===-1){
+        divIOS.style.display = 'none';
+      }
+      if(window.matchMedia('(display-mode:standalone)').matches||navigator.standalone){
         divIOS.style.display = 'none';
       }
       var iosButton = document.querySelector('.add-to-ios-btn');
