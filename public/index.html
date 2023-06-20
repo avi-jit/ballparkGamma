@@ -32,10 +32,21 @@
   </head>
   <style>
     body {background-color: #23272c;}
+    .add-to{
+      margin: 0 auto;
+    }
+    .add-to-btn{
+      border-radius:10px;
+      margin:auto;
+    }
   </style>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="add-to">
+      <button class="add-to-btn">Install App</button>
+    </div>
     <div id="root"></div>
+    
     <script>
       if('serviceWorker' in navigator){
         window.addEventListener('load',()=>{
@@ -44,6 +55,33 @@
           .catch((err)=>console.log(err));
         })
       }
+      let deferredPrompt;
+      var div = document.querySelector('.add-to');
+      console.log(div);
+      var button = document.querySelector('.add-to-btn');
+      div.style.display = 'none';
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+        // Update UI notify the user they can install the PWA
+        div.style.display = 'block';
+        // Optionally, send analytics event that PWA install promo was shown.
+        console.log(`'beforeinstallprompt' event was fired.`);
+        button.addEventListener('click', async () => {
+          // Hide the app provided install promotion
+          div.style.display = 'none';
+          // Show the install prompt
+          deferredPrompt.prompt();
+          // Wait for the user to respond to the prompt
+          const { outcome } = await deferredPrompt.userChoice;
+          // Optionally, send analytics event with outcome of user choice
+          console.log(`User response to the install prompt: ${outcome}`);
+          // We've used the prompt, and can't use it again, throw it away
+          deferredPrompt = null;
+        });
+      });
     </script>
   </body>
 </html>

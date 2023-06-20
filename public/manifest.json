@@ -2,10 +2,15 @@
   "name": "Ballpark App PWA",
   "icons": [
       {
-          "src": "/images/hollywood.png",
-          "type": "image/png",
-          "sizes": "1024x1024"
-      }
+          "src": "/images/home.webp",
+          "type": "image/webp",
+          "sizes": "192x192"
+      },
+      {
+        "src": "/images/home.webp",
+        "type": "image/webp",
+        "sizes": "512x512"
+    }
   ],
   "start_url": ".",
   "display": "standalone",
