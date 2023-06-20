@@ -99,7 +99,7 @@
       if(window.navigator.userAgent.indexOf("Mac")===-1){
         divIOS.style.display = 'none';
       }
-      if(window.matchMedia('(display-mode:standalone)').matches||navigator.standalone){
+      if(window.matchMedia('(display-mode:standalone)').matches||window.navigator.standalone){
         divIOS.style.display = 'none';
       }
       var iosButton = document.querySelector('.add-to-ios-btn');
