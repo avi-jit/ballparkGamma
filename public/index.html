@@ -36,6 +36,10 @@
       display:"flex";
       align-items:"center";
     }
+    .add-to-ios{
+      display:"flex";
+      align-items:"center";
+    }
     
     .add-to-btn{
       border-radius:10px;
@@ -50,7 +54,7 @@
       <button class="add-to-btn btn btn-secondary">Install App</button>
     </div>
     <div class="add-to-ios">
-      <button class="add-to-ios-btn btn btn-secondary">Install App</button>
+      <button class="add-to-ios-btn btn btn-secondary">Install App on ios</button>
     </div>
     <script>
       if('serviceWorker' in navigator){
@@ -63,9 +67,14 @@
       const relatedApps = navigator.getInstalledRelatedApps();
       const PWAisInstalled = relatedApps.length>0;
       var divIOS = document.querySelector('.add-to-ios');
-      if(PWAisInstalled){
+      console.log(window.navigator.userAgent.indexOf("Mac"));
+      if(PWAisInstalled || window.navigator.userAgent.indexOf("Mac")===-1){
         divIOS.style.display = 'none';
       }
+      var iosButton = document.querySelector('.add-to-btn-ios');
+      iosButton.addEventListener('click',()=>{
+        window.alert("Click on Share, and then add to Home screen.");
+      })
       let deferredPrompt;
       var div = document.querySelector('.add-to');
       console.log(div);
