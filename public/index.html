@@ -99,9 +99,12 @@
       if(window.navigator.userAgent.indexOf("Mac")===-1){
         divIOS.style.display = 'none';
       }
-      if(window.navigator.standalone){
+      if(window.navigator.userAgent.indexOf("Mac")!=-1){
+        if(navigator.standalone){
         divIOS.style.display = 'none';
       }
+      }
+      
       var iosButton = document.querySelector('.add-to-ios-btn');
       iosButton.addEventListener('click',()=>{
         window.alert("Click on Share, and then add to Home screen.");
