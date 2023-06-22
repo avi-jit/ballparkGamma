@@ -38,6 +38,58 @@ function Header() {
   
   
   React.useEffect(()=>{
+
+    if('serviceWorker' in navigator){
+      window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('./serviceworker.js')
+        .then((reg)=>console.log('Success:', reg.scope))
+        .catch((err)=>console.log(err));
+      })
+    }
+    
+    let deferredPrompt;
+    var div = document.querySelector('.add-to');
+    console.log(div);
+    var button = document.querySelector('.add-to-btn');
+    div.style.display = 'none';
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      // Update UI notify the user they can install the PWA
+      div.style.display = 'flex';
+      // Optionally, send analytics event that PWA install promo was shown.
+      console.log(`'beforeinstallprompt' event was fired.`);
+      button.addEventListener('click', async () => {
+        // Hide the app provided install promotion
+        div.style.display = 'none';
+        // Show the install prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        const { outcome } = await deferredPrompt.userChoice;
+        // Optionally, send analytics event with outcome of user choice
+        console.log(`User response to the install prompt: ${outcome}`);
+        // We've used the prompt, and can't use it again, throw it away
+        deferredPrompt = null;
+      });
+    });
+    var divIOS = document.querySelector('.add-ios');
+      console.log(divIOS);
+      console.log(window.navigator.userAgent.indexOf("Mac"));
+      if(window.navigator.userAgent.indexOf("Mac")===-1){
+        divIOS.style.display = 'none';
+      }
+      if(window.navigator.userAgent.indexOf("Mac")!==-1){
+        if(navigator.standalone){
+        divIOS.style.display = 'none';
+      }
+      }
+      
+      var iosButton = document.querySelector('.add-to-ios-btn');
+      iosButton.addEventListener('click',()=>{
+        window.alert("Click on Share, and then add to Home screen.");
+      })
     
     const SoundSwitch=()=>{
       if(localStorage.getItem("isSoundOn")===null){
@@ -153,6 +205,8 @@ function Header() {
                 <MenuItem key={2} onClick={handleCloseAboutMenu}>
                   <Typography textAlign="center" href="/">About</Typography>
                 </MenuItem>
+                
+                
                 <MenuItem key={3} onClick={handleSoundMenu}>
                   <Typography textAlign="center" href="/">Sound
                 <Switch id='sound-toggle' checked={isSoundOn} onChange={handleSoundToggle} color='secondary'/> </Typography>
@@ -200,6 +254,29 @@ function Header() {
               >
                 About
               </Button>
+              <div className="add-to">
+              <Button
+                key={6}
+                //onClick={handleCloseAboutMenu}
+                className='add-to-btn'
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Install App
+              </Button>
+
+              </div>
+              <div className="add-ios">
+              <Button
+                key={6}
+                //onClick={handleCloseAboutMenu}
+                className='add-to-ios-btn'
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Install on Mac/ios
+              </Button>
+
+              </div>
+              
               <Button
                 key={3}
                 
