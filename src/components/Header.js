@@ -11,7 +11,7 @@ import Container from '@mui/material/Container';
 import Switch from '@material-ui/core/Switch';
 
 import Rodal from 'rodal';
-
+import { messaging } from './firebase';
 import Button from '@mui/material/Button';
 
 import MenuItem from '@mui/material/MenuItem';
@@ -28,7 +28,7 @@ const darkTheme = createTheme({
       },
     },
   });
-  
+ 
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -38,15 +38,19 @@ function Header() {
   
   
   React.useEffect(()=>{
-
+    
     if('serviceWorker' in navigator){
       window.addEventListener('load',()=>{
         navigator.serviceWorker.register('./serviceworker.js')
         .then((reg)=>console.log('Success:', reg.scope))
         .catch((err)=>console.log(err));
       })
+
+      
+          
+        
+      
     }
-    
     let deferredPrompt;
     var div = document.querySelector('.add-to');
     console.log(div);
@@ -90,6 +94,20 @@ function Header() {
       iosButton.addEventListener('click',()=>{
         window.alert("Click on Share, and then add to Home screen.");
       })
+      const requestPermission = async () => {
+        try {
+          const permissionStatus = await Notification.requestPermission();
+          if (permissionStatus === 'granted') {
+            const currentToken = await messaging.getToken();
+            
+            console.log(currentToken);
+            window.alert("Notifications subscribed");
+          }
+        } catch (error) {
+          console.error('Push notification permission error:', error);
+        }
+      };
+      requestPermission();
     
     const SoundSwitch=()=>{
       if(localStorage.getItem("isSoundOn")===null){
