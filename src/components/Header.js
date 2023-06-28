@@ -101,7 +101,7 @@ function Header() {
             const currentToken = await messaging.getToken();
             
             console.log(currentToken);
-            window.alert("Notifications subscribed");
+            //window.alert("Notifications subscribed");
           }
         } catch (error) {
           console.error('Push notification permission error:', error);
