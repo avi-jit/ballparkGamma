@@ -175,6 +175,11 @@ function Header() {
     setAnchorElNav(null);
     show();
   };
+  const handleCloseNotificationsMenu = () => {
+    setAnchorElNav(null);
+    window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
+    
+  };
   const handleHomeCloseNavMenu = () => {
     setAnchorElNav(null);
     window.location.reload();
@@ -256,9 +261,8 @@ function Header() {
                 <Switch id='Music-toggle' checked={isMusicOn} onChange={handleMusicToggle} color='secondary'/> </Typography>
                 <Sound url={'audio/Only the Braves - FiftySounds.mp3'} playStatus={isMusicOn ? Sound.status.PLAYING : Sound.status.STOPPED} loop={true}/>
                 </MenuItem>
-                <MenuItem key={5} onClick={handleSoundMenu}>
-                  <Typography  className="notificationsToggle" textAlign="center" href="/">Notifications
-                <Switch id='Notifications-toggle' checked={isNotificationsOn}  color='secondary'/> </Typography>
+                <MenuItem key={5} onClick={handleCloseNotificationsMenu}>
+                  <Typography textAlign="center" href="/">Notifications</Typography>
                 </MenuItem>
               
             </Menu>
