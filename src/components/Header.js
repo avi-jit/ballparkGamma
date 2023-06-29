@@ -33,6 +33,7 @@ const darkTheme = createTheme({
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [visible,setVisible] = React.useState(false);
+  const [notRodal,setNotRodal] = React.useState(false);
   const [isSoundOn,setIsSoundOn] = React.useState(true);
   const [isMusicOn,setIsMusicOn] = React.useState(false);
   const [isNotificationsOn, setIsNotificationsOn] = React.useState(false);
@@ -166,7 +167,12 @@ function Header() {
   const hide = ()=>{
     setVisible(false);
   }
-
+  const notRodalShow = ()=>{
+    setNotRodal(true);
+  }
+  const notRodalHide = ()=>{
+    setNotRodal(false);
+  }
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
     
@@ -177,7 +183,8 @@ function Header() {
   };
   const handleCloseNotificationsMenu = () => {
     setAnchorElNav(null);
-    window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
+    notRodalShow();
+    //window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
     
   };
   const handleHomeCloseNavMenu = () => {
@@ -360,6 +367,20 @@ function Header() {
     </AppBar>
     </ThemeProvider>
     <Rodal visible={visible} width={350} height={300} onClose={hide}>
+          <div>
+            <h6>Ballpark - A Numeracy facts game</h6>
+            <div style={{textAlign:'left', margin:"2px"}}>
+            <ul>
+                <li>Instructions: Put the cards correctly on the number line in ascending order. You can play in single player mode, or multiplayer mode.</li>
+                <li>Created by <a href="https://github.com/harsh1245-bit" target="_blank" rel="noopener noreferrer">Harsh</a> under the supervision of <a href="https://github.com/avi-jit" target="_blank" rel="noopener noreferrer">Avijit thawani</a>.</li>
+                <li>Disclaimer: Data is ChatGPT generated but is almost always correct, though sometimes outdated.</li>
+            </ul>
+
+            </div>
+            
+        </div>
+    </Rodal>
+    <Rodal visible={notRodal} width={350} height={300} onClose={notRodalHide}>
           <div>
             <h6>Ballpark - A Numeracy facts game</h6>
             <div style={{textAlign:'left', margin:"2px"}}>
