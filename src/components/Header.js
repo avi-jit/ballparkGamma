@@ -251,8 +251,8 @@ function Header() {
                 <Sound url={'audio/Only the Braves - FiftySounds.mp3'} playStatus={isMusicOn ? Sound.status.PLAYING : Sound.status.STOPPED} loop={true}/>
                 </MenuItem>
                 <MenuItem key={5} onClick={handleSoundMenu}>
-                  <Typography textAlign="center" href="/">Notifications
-                <Switch id='Notifications-toggle' className="notificationsToggle" onChange ={handleNoti} checked={isNotificationsOn}  color='secondary'/> </Typography>
+                  <Typography  className="notificationsToggle" textAlign="center" href="/">Notifications
+                <Switch id='Notifications-toggle' checked={isNotificationsOn}  color='secondary'/> </Typography>
                 </MenuItem>
               
             </Menu>
