@@ -135,8 +135,8 @@ function Header() {
     }
     var permissionButton = document.querySelector('.notificationsToggle')
     permissionButton.addEventListener('click', ()=>{
-      window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
-
+      //window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
+      console.log("done")
     })
     
     SoundSwitch();
@@ -353,6 +353,7 @@ function Header() {
               <Button
                 key={7}
                 className="notificationsToggle"
+                onClick={handleCloseNotificationsMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Notifications  
@@ -388,8 +389,8 @@ function Header() {
                 <li>Android or Mac users: Change these settings from browser itself.</li>
                 <li>iOS users:
                   <ul>
-                    <li>Go to Settings &gt Safari &gt Turn off Block Pop-ups</li>
-                    <li>Then go to Advanced &gt Experimental Eeatures &gt configure push API</li>
+                    <li>Go to Settings &gt; Safari &gt; Turn off Block Pop-ups</li>
+                    <li>Then go to Advanced &gt; Experimental Eeatures &gt; configure push API</li>
                   </ul>
                 </li>
             </ul>
