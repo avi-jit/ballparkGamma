@@ -87,6 +87,7 @@ function Header() {
         divIOS.style.display = 'none';
       }
       if(window.navigator.userAgent.indexOf("Mac")!==-1){
+        div.style.display = 'none';
         if(navigator.standalone){
         divIOS.style.display = 'none';
       }
