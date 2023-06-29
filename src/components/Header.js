@@ -134,7 +134,7 @@ function Header() {
     }
     var permissionButton = document.querySelector('.notificationsToggle')
     permissionButton.addEventListener('click', ()=>{
-      window.alert("Website do not have controls, change this setting from website settings in the browser.");
+      window.alert("-Android and Mac users: Change these settings from browser itself \n -iOS users: Go to settings> safari> advanced> experimental features> configure push API and turn off block pop-ups.");
 
     })
     
