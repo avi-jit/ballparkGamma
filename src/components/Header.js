@@ -357,7 +357,7 @@ function Header() {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 Notifications  
-                <Switch id='Notifications-toggle' checked={isNotificationsOn} color='secondary'/>
+                <Switch id='Notifications-toggle' checked={isNotificationsOn} disabled color='secondary'/>
               </Button>
             
           </Box>
