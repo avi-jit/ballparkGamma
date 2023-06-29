@@ -57,9 +57,11 @@
     <div class="add-to">
       <button class="add-to-btn btn btn-secondary">Install App</button>
     </div>
+    
     <div class="add-ios">
       <button class="add-to-ios-btn btn btn-secondary">Install App on Mac/ios</button>
     </div>
+    
     <script>
       if('serviceWorker' in navigator){
         window.addEventListener('load',()=>{
@@ -113,6 +115,8 @@
       iosButton.addEventListener('click',()=>{
         window.alert("Click on Share, and then add to Home screen.");
       })
+
+      
     </script>
   </body>
 </html>

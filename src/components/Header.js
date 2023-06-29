@@ -35,6 +35,7 @@ function Header() {
   const [visible,setVisible] = React.useState(false);
   const [isSoundOn,setIsSoundOn] = React.useState(true);
   const [isMusicOn,setIsMusicOn] = React.useState(false);
+  const [isNotificationsOn, setIsNotificationsOn] = React.useState(false);
   
   
   React.useEffect(()=>{
@@ -99,7 +100,8 @@ function Header() {
           const permissionStatus = await Notification.requestPermission();
           if (permissionStatus === 'granted') {
             const currentToken = await messaging.getToken();
-            
+            setIsNotificationsOn(true);
+            localStorage.setItem("isNotificationsOn",true);
             console.log(currentToken);
             //window.alert("Notifications subscribed");
           }
@@ -107,7 +109,9 @@ function Header() {
           console.error('Push notification permission error:', error);
         }
       };
+      
       requestPermission();
+    
     
     const SoundSwitch=()=>{
       if(localStorage.getItem("isSoundOn")===null){
@@ -120,11 +124,17 @@ function Header() {
         setIsSoundOn(false);
       }
     }
+    var permissionButton = document.querySelector('.notificationsToggle')
+    permissionButton.addEventListener('click', ()=>{
+      window.alert("Website do not have controls, change this setting from website settings in the browser.");
+
+    })
     
     SoundSwitch();
     
     
-  },[setIsSoundOn,setIsMusicOn])
+  },[setIsSoundOn,setIsMusicOn, isNotificationsOn])
+  
   const handleSoundToggle = ()=>{
     setIsSoundOn(!isSoundOn);
     localStorage.setItem("isSoundOn",!isSoundOn);
@@ -133,6 +143,8 @@ function Header() {
     setIsMusicOn(!isMusicOn);
     localStorage.setItem("isMusicOn",!isMusicOn);
   };
+  
+
   const handleSoundMenu = ()=>{
     //console.log(isSoundOn)
   }
@@ -159,11 +171,15 @@ function Header() {
     setAnchorElNav(null);
     window.location.reload();
   };
-
+  const handleNoti =()=>{
+    
+  }
+  
  
 
   return (
     <>
+    
     <ThemeProvider theme={darkTheme}>
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -233,6 +249,10 @@ function Header() {
                   <Typography textAlign="center" href="/">Music
                 <Switch id='Music-toggle' checked={isMusicOn} onChange={handleMusicToggle} color='secondary'/> </Typography>
                 <Sound url={'audio/Only the Braves - FiftySounds.mp3'} playStatus={isMusicOn ? Sound.status.PLAYING : Sound.status.STOPPED} loop={true}/>
+                </MenuItem>
+                <MenuItem key={5} onClick={handleSoundMenu}>
+                  <Typography textAlign="center" href="/">Notifications
+                <Switch id='Notifications-toggle' className="notificationsToggle" onChange ={handleNoti} checked={isNotificationsOn}  color='secondary'/> </Typography>
                 </MenuItem>
               
             </Menu>
@@ -312,6 +332,14 @@ function Header() {
                 Music
                 <Switch id='Music-toggle' checked={isMusicOn} onChange={handleMusicToggle} color='secondary'/>
                 <Sound url={'audio/Only the Braves - FiftySounds.mp3'} playStatus={isMusicOn?Sound.status.PLAYING:Sound.status.STOPPED} loop={true}/>
+              </Button>
+              <Button
+                key={7}
+                className="notificationsToggle"
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Notifications  
+                <Switch id='Notifications-toggle' checked={isNotificationsOn} color='secondary'/>
               </Button>
             
           </Box>
