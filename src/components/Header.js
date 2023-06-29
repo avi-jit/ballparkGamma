@@ -382,12 +382,16 @@ function Header() {
     </Rodal>
     <Rodal visible={notRodal} width={350} height={300} onClose={notRodalHide}>
           <div>
-            <h6>Ballpark - A Numeracy facts game</h6>
+            <h6>Notifications: Instructions</h6>
             <div style={{textAlign:'left', margin:"2px"}}>
             <ul>
-                <li>Instructions: Put the cards correctly on the number line in ascending order. You can play in single player mode, or multiplayer mode.</li>
-                <li>Created by <a href="https://github.com/harsh1245-bit" target="_blank" rel="noopener noreferrer">Harsh</a> under the supervision of <a href="https://github.com/avi-jit" target="_blank" rel="noopener noreferrer">Avijit thawani</a>.</li>
-                <li>Disclaimer: Data is ChatGPT generated but is almost always correct, though sometimes outdated.</li>
+                <li>Android or Mac users: Change these settings from browser itself.</li>
+                <li>iOS users:
+                  <ul>
+                    <li>Go to Settings &gt Safari &gt Turn off Block Pop-ups</li>
+                    <li>Then go to Advanced &gt Experimental Eeatures &gt configure push API</li>
+                  </ul>
+                </li>
             </ul>
 
             </div>
