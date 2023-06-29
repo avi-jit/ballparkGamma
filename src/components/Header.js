@@ -134,7 +134,7 @@ function Header() {
     }
     var permissionButton = document.querySelector('.notificationsToggle')
     permissionButton.addEventListener('click', ()=>{
-      window.alert("-Android and Mac users: Change these settings from browser itself \n -iOS users: Go to settings> safari> advanced> experimental features> configure push API and turn off block pop-ups.");
+      window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
 
     })
     
