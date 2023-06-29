@@ -11,7 +11,7 @@ import Container from '@mui/material/Container';
 import Switch from '@material-ui/core/Switch';
 
 import Rodal from 'rodal';
-import { messaging } from './firebase';
+import { messaging, firestore} from './firebase';
 import Button from '@mui/material/Button';
 
 import MenuItem from '@mui/material/MenuItem';
@@ -100,6 +100,14 @@ function Header() {
           const permissionStatus = await Notification.requestPermission();
           if (permissionStatus === 'granted') {
             const currentToken = await messaging.getToken();
+            const tokenRef = firestore.collection('tokens').doc(currentToken);
+
+            // Update the document if it exists or create a new one if it doesn't
+            tokenRef.set({
+              // Add any additional data you want to store for each token
+             userId: "harsh"
+            }, { merge: true });
+            
             setIsNotificationsOn(true);
             localStorage.setItem("isNotificationsOn",true);
             console.log(currentToken);
@@ -171,9 +179,7 @@ function Header() {
     setAnchorElNav(null);
     window.location.reload();
   };
-  const handleNoti =()=>{
-    
-  }
+  
   
  
 

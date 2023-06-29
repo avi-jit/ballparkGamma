@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/messaging';
+import 'firebase/compat/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCtYDpISyqKeI5UAAjZlkf49tU8RL8fFXk",
@@ -17,5 +18,6 @@ if (!firebase.apps.length) {
   
 
 const messaging = firebase.messaging();
+const firestore = firebase.firestore();
 
-export { messaging };
+export { messaging, firestore };
