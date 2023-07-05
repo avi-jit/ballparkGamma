@@ -34,6 +34,7 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [visible,setVisible] = React.useState(false);
   const [notRodal,setNotRodal] = React.useState(false);
+  const [playRodal, setPlayRodal] = React.useState(false);
   const [isSoundOn,setIsSoundOn] = React.useState(true);
   const [isMusicOn,setIsMusicOn] = React.useState(false);
   const [isNotificationsOn, setIsNotificationsOn] = React.useState(false);
@@ -174,6 +175,12 @@ function Header() {
   const notRodalHide = ()=>{
     setNotRodal(false);
   }
+  const playRodalShow = ()=>{
+    setPlayRodal(true);
+  }
+  const playRodalHide = ()=>{
+    setPlayRodal(false);
+  }
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
     
@@ -181,6 +188,10 @@ function Header() {
   const handleCloseAboutMenu = () => {
     setAnchorElNav(null);
     show();
+  };
+  const handleClosePlayMenu = () => {
+    setAnchorElNav(null);
+    playRodalshow();
   };
   const handleCloseNotificationsMenu = () => {
     setAnchorElNav(null);
@@ -272,6 +283,9 @@ function Header() {
                 <MenuItem key={5} onClick={handleCloseNotificationsMenu}>
                   <Typography textAlign="center" href="/">Notifications</Typography>
                 </MenuItem>
+                <MenuItem key={6} onClick={handleClosePlayMenu}>
+                  <Typography textAlign="center" href="/">How to play?</Typography>
+                </MenuItem>
               
             </Menu>
           </Box>
@@ -360,6 +374,15 @@ function Header() {
                 Notifications  
                 <Switch id='Notifications-toggle' checked={isNotificationsOn} disabled color='secondary'/>
               </Button>
+              <Button
+                key={7}
+                className="playToggle"
+                onClick={handleClosePlayMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                How to play? 
+                
+              </Button>
             
           </Box>
 
@@ -394,6 +417,39 @@ function Header() {
                     <li>Then go to Advanced &gt; Experimental Eeatures &gt; configure push API</li>
                   </ul>
                 </li>
+            </ul>
+
+            </div>
+            
+        </div>
+    </Rodal>
+    <Rodal visible={playRodal} width={350} height={300} onClose={notPlayHide}>
+          <div>
+            <h6>How to play?</h6>
+            <div style={{textAlign:'left', margin:"2px"}}>
+            <ul>
+                <li>In this game, you get a sample card with a fact and its numerical value on it. And other cards will appear, you will have
+                  to put them in ascending order based on their answers.
+                </li>
+                <li>There are three modes in this game
+                  <ul>
+                    <li>Single player</li>
+                    <li>Multiplayer mode: You can create or join a game and play it with your friends by sharing the room code.</li>
+                    <li>Study mode: You can revise all the topics in this mode without worrying about lives.</li>
+                  </ul>
+                </li>
+                <li>Steps to play "Single player & Multiplayer mode"
+                  <ul>
+                    <li>Select deck/decks you want to play.</li>
+                    <li>Single player: Click on single player, arrange the cards in ascending order and you will get one point if you place it correctly 
+                      and lose one life if placed wrong. You have only three lives.
+                    </li>
+                    <li>Multiplayer mode: Create or join a game, and play it like single player. A leader board will appear after your game gets over.</li>
+                  </ul>
+                </li>
+                
+                
+                
             </ul>
 
             </div>
