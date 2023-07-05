@@ -423,7 +423,7 @@ function Header() {
             
         </div>
     </Rodal>
-    <Rodal visible={playRodal} width={350}  onClose={playRodalHide}>
+    <Rodal visible={playRodal} width={350}  height={900} onClose={playRodalHide}>
           <div>
             <h6>How to play?</h6>
             <div style={{textAlign:'left', margin:"2px"}}>
