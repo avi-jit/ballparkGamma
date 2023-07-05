@@ -431,13 +431,7 @@ function Header() {
                 <li>In this game, you get a sample card with a fact and its numerical value on it. And other cards will appear, you will have
                   to put them in ascending order based on their answers.
                 </li>
-                <li>There are three modes in this game
-                  <ul>
-                    <li>Single player</li>
-                    <li>Multiplayer mode: You can create or join a game and play it with your friends by sharing the room code.</li>
-                    <li>Study mode: You can revise all the topics in this mode without worrying about lives.</li>
-                  </ul>
-                </li>
+                
                 <li>Steps to play "Single player & Multiplayer mode"
                   <ul>
                     <li>Select deck/decks you want to play.</li>
@@ -447,6 +441,7 @@ function Header() {
                     <li>Multiplayer mode: Create or join a game, and play it like single player. A leader board will appear after your game gets over.</li>
                   </ul>
                 </li>
+                <li>Study mode: You can revise all the topics in this mode without worrying about lives.</li>
                 
                 
                 
