@@ -441,7 +441,7 @@ function Header() {
                     <li>Multiplayer mode: Create or join a game, and play it like single player. A leader board will appear after your game gets over.</li>
                   </ul>
                 </li>
-                <li>Study mode: You can revise all the topics in this mode without worrying about lives.</li>
+                <li>Study mode: You can revise all the decks in this mode without worrying about lives.</li>
                 
                 
                 
