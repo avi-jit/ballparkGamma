@@ -429,7 +429,7 @@ function Header() {
             <div style={{textAlign:'left', margin:"2px"}}>
             <ul>
                 <li>In this game, you get a sample card with a fact and its numerical value on it. And other cards will appear, you will have
-                  to put them in ascending order based on their answers.
+                  to drag and drop them in ascending order based on their answers.
                 </li>
                 
                 <li>Steps to play "Single player & Multiplayer mode"
