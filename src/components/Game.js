@@ -230,6 +230,7 @@ export default function Game() {
   }
   
   const startGame = async()=>{
+    document.getElementById("loadingSingle").style.display = "block";
     if(localStorage.getItem('isMusicOn')===null||localStorage.getItem('isMusicOn')==="true"){
         
         
@@ -294,7 +295,7 @@ export default function Game() {
       }
       setQuestions(arr);
       
-      console.log(questions);
+      //console.log(questions);
     }
     setStarted(true);
   }
@@ -615,6 +616,7 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if (!started) {
     return (
       <>
+      <div id="loadingSingle" style={{display:"none",alignItems:"center",color:"white", margin:"auto"}}><h6>Loading cards, refresh if it takes long.</h6></div>
       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
             <br />
           <div style={{textAlign:"left", flex:1, wordBreak:"break-all"}}>

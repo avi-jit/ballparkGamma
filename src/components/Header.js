@@ -135,6 +135,17 @@ function Header() {
         setIsSoundOn(false);
       }
     }
+    const helpSwitch=()=>{
+      if(localStorage.getItem("isHelpOn")===null){
+        setPlayRodal(true);
+      }
+      if(localStorage.getItem("isHelpOn")==="true"){
+        setPlayRodal(true);
+      }
+      if(localStorage.getItem("isHelpOn")==="false"){
+        setPlayRodal(false);
+      }
+    }
     var permissionButton = document.querySelector('.notificationsToggle')
     permissionButton.addEventListener('click', ()=>{
       //window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
@@ -142,6 +153,7 @@ function Header() {
     })
     
     SoundSwitch();
+    helpSwitch();
     
     
   },[setIsSoundOn,setIsMusicOn, isNotificationsOn])
@@ -180,6 +192,7 @@ function Header() {
   }
   const playRodalHide = ()=>{
     setPlayRodal(false);
+    localStorage.setItem("isHelpOn",false);
   }
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
