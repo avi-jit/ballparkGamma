@@ -22,3 +22,7 @@ To install and run BallPark, please follow these steps:
 
    ```bash
    git clone https://github.com/your-username/BallPark.git
+   cd BallPark
+   npm install
+   npm start
+   bash```
