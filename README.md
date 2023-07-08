@@ -25,4 +25,4 @@ To install and run BallPark, please follow these steps:
    cd BallPark
    npm install
    npm start
-   bash```
+   ```
