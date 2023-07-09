@@ -15,6 +15,7 @@ export default function Board(props) {
   const { highscore, resetGame, state, setState, updateHighscore, createdRoom, name} = props;
 
   const [isDragging, setIsDragging] = useState(false);
+  const [right, setRight] = useState(0);
   
   async function onDragStart() {
     setIsDragging(true);
@@ -65,6 +66,12 @@ export default function Board(props) {
         item,
         destination.index
       );
+      if(correct){
+        setRight(setRight+1);
+      }
+      if(!correct){
+        setRight(0);
+      }
       console.log(localStorage.getItem('isSoundOn'));
       if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
         console.log(localStorage.getItem('isSoundOn'))
@@ -96,7 +103,7 @@ export default function Board(props) {
         next: newNext,
         nextButOne: newNextButOne,
         played: newPlayed,
-        lives: correct ? state.lives : state.lives - 1,
+        lives: correct?(right===3?state.lives+1:state.lives):state.lives-1,
         badlyPlaced: correct
           ? null
           : {
