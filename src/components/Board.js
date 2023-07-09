@@ -66,11 +66,17 @@ export default function Board(props) {
         item,
         destination.index
       );
+      document.getElementById("live").style.display="none";
       if(correct){
-        setRight(setRight+1);
+        var d = right;
+        setRight(d+1);
+        
       }
       if(!correct){
         setRight(0);
+      }
+      if(right===2 && state.lives<3){
+        document.getElementById("live").style.display="block";
       }
       console.log(localStorage.getItem('isSoundOn'));
       if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
@@ -95,7 +101,7 @@ export default function Board(props) {
         newNext ? [...newPlayed, newNext] : newPlayed
       );
       const newImageCache = [preloadImage(newNextButOne.image)];
-
+      console.log(right);
       setState({
         ...state,
         deck: newDeck,
@@ -103,7 +109,7 @@ export default function Board(props) {
         next: newNext,
         nextButOne: newNextButOne,
         played: newPlayed,
-        lives: correct?(right===3?state.lives+1:state.lives):state.lives-1,
+        lives: correct?(right===2?Math.min(3,state.lives+1):state.lives):state.lives-1,
         badlyPlaced: correct
           ? null
           : {
@@ -195,6 +201,7 @@ export default function Board(props) {
           />
         </div>
         <div className={styles.top}>
+          <div id="live" style={{display:"none",color:"white"}}><h6>Three correct cards, you got one life.</h6></div>
           <Hearts lives={state.lives} />
           {state.lives > 0 ? (
             <>
