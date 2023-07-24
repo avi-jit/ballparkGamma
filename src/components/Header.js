@@ -9,11 +9,12 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Switch from '@material-ui/core/Switch';
-
+import TimePicker from '@mui/lab/TimePicker';
+import TextField from '@mui/material/TextField'; 
 import Rodal from 'rodal';
 import { messaging, firestore} from './firebase';
 import Button from '@mui/material/Button';
-
+ 
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -38,6 +39,13 @@ function Header() {
   const [isSoundOn,setIsSoundOn] = React.useState(true);
   const [isMusicOn,setIsMusicOn] = React.useState(false);
   const [isNotificationsOn, setIsNotificationsOn] = React.useState(false);
+  const [token, setToken] = React.useState(false);
+  const [timeVal, setTimeVal] = React.useState("10:00");
+  const handleChange = (newValue)=>   
+{  
+    setTimeVal(newValue.target.value);  
+    console.log(newValue.target.value);
+  };  
   
   
   React.useEffect(()=>{
@@ -114,6 +122,10 @@ function Header() {
             setIsNotificationsOn(true);
             localStorage.setItem("isNotificationsOn",true);
             console.log(currentToken);
+            setToken(currentToken);
+            const RegTokens = []
+            RegTokens.push(currentToken);
+            subsFunc(currentToken, "morning");
             //window.alert("Notifications subscribed");
           }
         } catch (error) {
@@ -122,6 +134,49 @@ function Header() {
       };
       
       requestPermission();
+      const subsFunc = (token, topic) => {
+        // Use the FCM REST API directly in your React app to subscribe the user to a topic
+        // This exposes the FCM Server Key in your client-side code, which is not recommended for production apps
+        // This s// Check if token and topic are provided
+  if (!token || !topic) {
+    console.error('Error: Invalid token or topic.');
+    return;
+  }
+
+  // Construct the FCM API endpoint URL
+  const fcmUrl = 'https://iid.googleapis.com/iid/v1:batchAdd';
+
+  // Construct the request body
+  const requestBody = {
+    to: `/topics/${topic}`,
+    registration_tokens: [token],
+  };
+
+  // Set the FCM Server Key
+  const fcmServerKey = 'AAAAnICAHLQ:APA91bF2U8GPqG6iMO7d5K_VkOA1_P12n0pFv75Lhw3XVC5Dp8OB_kScl9E4OuniLXF0IiQ2nvk3NdRm40MGftTXIV6JBycTZCHmWvJtMKNjXez9ugtorsfhnTyu7eAS4-muMaL77d4m'; // Replace with your actual FCM Server Key
+
+  // Make the fetch request to subscribe the user to the topic
+  fetch(fcmUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': `key=${fcmServerKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log('Subscription successful:', data);
+  })
+  .catch((error) => {
+    console.error('Error subscribing user:', error);
+  });
+  };
     
     
     const SoundSwitch=()=>{
@@ -418,7 +473,7 @@ function Header() {
             
         </div>
     </Rodal>
-    <Rodal visible={notRodal} width={350} height={300} onClose={notRodalHide}>
+    <Rodal visible={notRodal} width={350} height={380} onClose={notRodalHide}>
           <div>
             <h6>Notifications: Instructions</h6>
             <div style={{textAlign:'left', margin:"2px"}}>
@@ -430,8 +485,27 @@ function Header() {
                     <li>Then go to Advanced &gt; Experimental Eeatures &gt; configure push API</li>
                   </ul>
                 </li>
+                <li>
+                  You can choose when to receive notifications, click below to select time.
+                </li>
             </ul>
+            <div style={{padding:"2px"}}>
+            <TextField
+        label="Choose Time"
+        defaultValue={timeVal}
+        type="time"
+        onChange = {handleChange}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        // 5 minutes
+        inputProps={{
+          step: 3600,
+        }}
+      />
 
+            </div>
+             
             </div>
             
         </div>
