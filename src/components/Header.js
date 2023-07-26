@@ -32,6 +32,15 @@ const darkTheme = createTheme({
  
 
 function Header() {
+  const timeAlter = (val)=>{
+    var x = "";
+    x+=val[0];
+    x+=val[1];
+    x+=":";
+    x+=val[2];
+    x+=val[3];
+    return x;
+  }
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [visible,setVisible] = React.useState(false);
   const [notRodal,setNotRodal] = React.useState(false);
@@ -40,7 +49,8 @@ function Header() {
   const [isMusicOn,setIsMusicOn] = React.useState(false);
   const [isNotificationsOn, setIsNotificationsOn] = React.useState(false);
   const [token, setToken] = React.useState(false);
-  const [timeVal, setTimeVal] = React.useState("10:00");
+  const [timeVal, setTimeVal] = React.useState(localStorage.getItem("subscription")?timeAlter(localStorage.getItem("subscription")):"10:00");
+  
   const handleChange = (newValue)=>   
 {  
     setTimeVal(newValue.target.value);  
@@ -269,14 +279,28 @@ const unsubsFunc = (token, topic) => {
   });
 };
 
-  
+function nearestHour(timeString) {
+  const [hours, minutes] = timeString.split(':').map(Number);
+  let nearestHour;
+
+  if (minutes >= 30) {
+    nearestHour = (hours + 1) % 24;
+  } else {
+    nearestHour = hours;
+  }
+
+  return String(nearestHour).padStart(2, '0') + ':00';
+}
   const subscribe = () =>{
     const unsubscribeTopic = localStorage.getItem("subscription");
     //console.log(token,unsubscribeTopic);
     //console.log(typeof unsubscribeTopic, typeof timeVal)
     unsubsFunc(token,unsubscribeTopic);
-    localStorage.setItem("subscription",timeVal.replace(":",""));
+    console.log(nearestHour(timeVal));
+    localStorage.setItem("subscription",nearestHour(timeVal).replace(":",""));
+    setTimeVal(nearestHour(timeVal));
     subsFunc();
+    window.alert("Subscribed to notifications, refresh to view changes.")
 
   }
   const handleSoundMenu = ()=>{
@@ -529,7 +553,7 @@ const unsubsFunc = (token, topic) => {
             
         </div>
     </Rodal>
-    <Rodal visible={notRodal} width={350} height={380} onClose={notRodalHide}>
+    <Rodal visible={notRodal} width={350} height={410} onClose={notRodalHide}>
           <div>
             <h6>Notifications: Instructions</h6>
             <div style={{textAlign:'left', margin:"2px"}}>
@@ -544,6 +568,7 @@ const unsubsFunc = (token, topic) => {
                 <li>
                   You can choose when to receive notifications, click below to select time.
                 </li>
+                {localStorage.getItem("subscription")?(<li>Currently, your notifications are set to be delivered at time shown below</li>):(<>You may have not allowed permission for notifications.</>)}
             </ul>
             <div style={{padding:"2px"}}>
             <TextField
@@ -555,10 +580,9 @@ const unsubsFunc = (token, topic) => {
           shrink: true,
         }}
         // 5 minutes
-        inputProps={{
-          step: 300,
-        }}
+        step="3600000"
       />
+      
       <button className="btn btn-secondary rounded-pill" style={{marginLeft:"25px", marginTop:"5px"}} onClick={subscribe}>Subscribe</button>
 
             </div>
