@@ -553,7 +553,7 @@ function nearestHour(timeString) {
             
         </div>
     </Rodal>
-    <Rodal visible={notRodal} width={350} height={410} onClose={notRodalHide}>
+    <Rodal visible={notRodal} width={350} height={430} onClose={notRodalHide}>
           <div>
             <h6>Notifications: Instructions</h6>
             <div style={{textAlign:'left', margin:"2px"}}>
