@@ -9,7 +9,7 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Switch from '@material-ui/core/Switch';
-import TimePicker from '@mui/lab/TimePicker';
+
 import TextField from '@mui/material/TextField'; 
 import Rodal from 'rodal';
 import { messaging, firestore} from './firebase';
@@ -125,7 +125,8 @@ function Header() {
             setToken(currentToken);
             const RegTokens = []
             RegTokens.push(currentToken);
-            subsFunc(currentToken, "morning");
+            //console.log(typeof currentToken)
+            //subsFunc(currentToken, "noon");
             //window.alert("Notifications subscribed");
           }
         } catch (error) {
@@ -134,49 +135,8 @@ function Header() {
       };
       
       requestPermission();
-      const subsFunc = (token, topic) => {
-        // Use the FCM REST API directly in your React app to subscribe the user to a topic
-        // This exposes the FCM Server Key in your client-side code, which is not recommended for production apps
-        // This s// Check if token and topic are provided
-  if (!token || !topic) {
-    console.error('Error: Invalid token or topic.');
-    return;
-  }
 
-  // Construct the FCM API endpoint URL
-  const fcmUrl = 'https://iid.googleapis.com/iid/v1:batchAdd';
-
-  // Construct the request body
-  const requestBody = {
-    to: `/topics/${topic}`,
-    registration_tokens: [token],
-  };
-
-  // Set the FCM Server Key
-  const fcmServerKey = 'AAAAnICAHLQ:APA91bF2U8GPqG6iMO7d5K_VkOA1_P12n0pFv75Lhw3XVC5Dp8OB_kScl9E4OuniLXF0IiQ2nvk3NdRm40MGftTXIV6JBycTZCHmWvJtMKNjXez9ugtorsfhnTyu7eAS4-muMaL77d4m'; // Replace with your actual FCM Server Key
-
-  // Make the fetch request to subscribe the user to the topic
-  fetch(fcmUrl, {
-    method: 'POST',
-    headers: {
-      'Authorization': `key=${fcmServerKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestBody),
-  })
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log('Subscription successful:', data);
-  })
-  .catch((error) => {
-    console.error('Error subscribing user:', error);
-  });
-  };
+  
     
     
     const SoundSwitch=()=>{
@@ -221,8 +181,104 @@ function Header() {
     setIsMusicOn(!isMusicOn);
     localStorage.setItem("isMusicOn",!isMusicOn);
   };
-  
+const subsFunc = () => {
+    // Use the FCM REST API directly in your React app to subscribe the user to a topic
+    // This exposes the FCM Server Key in your client-side code, which is not recommended for production apps
+    // This s// Check if token and topic are provided
+    //setTimeVal("morning");
 
+if (!token || !timeVal) {
+console.error('Error: Invalid token or topic.');
+return;
+}
+const topic = timeVal.replace(':','');
+// Construct the FCM API endpoint URL
+const fcmUrl = 'https://iid.googleapis.com/iid/v1:batchAdd';
+
+// Construct the request body
+const requestBody = {
+to: `/topics/${topic}`,
+registration_tokens: [token],
+};
+
+// Set the FCM Server Key
+const fcmServerKey = 'AAAAnICAHLQ:APA91bF2U8GPqG6iMO7d5K_VkOA1_P12n0pFv75Lhw3XVC5Dp8OB_kScl9E4OuniLXF0IiQ2nvk3NdRm40MGftTXIV6JBycTZCHmWvJtMKNjXez9ugtorsfhnTyu7eAS4-muMaL77d4m'; // Replace with your actual FCM Server Key
+
+// Make the fetch request to subscribe the user to the topic
+fetch(fcmUrl, {
+method: 'POST',
+headers: {
+  'Authorization': `key=${fcmServerKey}`,
+  'Content-Type': 'application/json',
+},
+body: JSON.stringify(requestBody),
+})
+.then((response) => {
+if (!response.ok) {
+  throw new Error('Network response was not ok');
+}
+return response.json();
+})
+.then((data) => {
+console.log('Subscription successful:', data);
+})
+.catch((error) => {
+console.error('Error subscribing user:', error);
+});
+};
+const unsubsFunc = (token, topic) => {
+  // Check if token and topic are provided
+  
+  if (!token || !topic) {
+    console.error('Error: Invalid token or topic.');
+    return;
+  }
+  topic = topic.replace(':','');
+  // Construct the FCM API endpoint URL
+  const fcmUrl = 'https://iid.googleapis.com/iid/v1:batchRemove';
+
+  // Construct the request body
+  const requestBody = {
+    to: `/topics/${topic}`,
+    registration_tokens: [token],
+  };
+
+  // Set the FCM Server Key
+  const fcmServerKey = 'AAAAnICAHLQ:APA91bF2U8GPqG6iMO7d5K_VkOA1_P12n0pFv75Lhw3XVC5Dp8OB_kScl9E4OuniLXF0IiQ2nvk3NdRm40MGftTXIV6JBycTZCHmWvJtMKNjXez9ugtorsfhnTyu7eAS4-muMaL77d4m'; // Replace with your actual FCM Server Key
+
+  // Make the fetch request to unsubscribe the user from the topic
+  fetch(fcmUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': `key=${fcmServerKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log('Unsubscription successful:', data);
+  })
+  .catch((error) => {
+    console.error('Error unsubscribing user:', error);
+  });
+};
+
+  
+  const subscribe = () =>{
+    const unsubscribeTopic = localStorage.getItem("subscription");
+    //console.log(token,unsubscribeTopic);
+    //console.log(typeof unsubscribeTopic, typeof timeVal)
+    unsubsFunc(token,unsubscribeTopic);
+    localStorage.setItem("subscription",timeVal.replace(":",""));
+    subsFunc();
+
+  }
   const handleSoundMenu = ()=>{
     //console.log(isSoundOn)
   }
@@ -500,9 +556,10 @@ function Header() {
         }}
         // 5 minutes
         inputProps={{
-          step: 3600,
+          step: 300,
         }}
       />
+      <button className="btn btn-secondary rounded-pill" style={{marginLeft:"25px", marginTop:"5px"}} onClick={subscribe}>Subscribe</button>
 
             </div>
              
