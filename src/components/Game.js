@@ -16,6 +16,7 @@ import Roomscores from "./Roomscores";
 import Button from "./Button";
 import SuffDropDown from "./SuffDropDown";
 import StudyMode from "./StudyMode";
+import ReactGA from 'react-ga';
 
 export default function Game() {
   const [audio] = useState(new Audio('audio/Only the Braves - FiftySounds.mp3'))
@@ -230,6 +231,7 @@ export default function Game() {
   }
   
   const startGame = async()=>{
+    ReactGA.event({'category':'Test','action':'click','label':'single Player'});
     document.getElementById("loadingSingle").style.display = "block";
     if(localStorage.getItem('isMusicOn')===null||localStorage.getItem('isMusicOn')==="true"){
         
