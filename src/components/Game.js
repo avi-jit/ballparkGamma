@@ -231,7 +231,11 @@ export default function Game() {
   }
   
   const startGame = async()=>{
-    ReactGA.event({category:'Test',action:'click',label:'singlePlayer', });
+    ReactGA.event({
+      category: 'Button Clicks',
+      action: 'Single player',
+    });
+
     document.getElementById("loadingSingle").style.display = "block";
     if(localStorage.getItem('isMusicOn')===null||localStorage.getItem('isMusicOn')==="true"){
         
