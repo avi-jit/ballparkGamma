@@ -227,6 +227,10 @@ export default function Game() {
   
   const studySetter = ()=>{
     setStudy(!study);
+    ReactGA.event({
+      category: 'Button Clicks',
+      action: 'Study mode',
+    });
     localStorage.setItem("study",!study);
   }
   
@@ -319,6 +323,10 @@ export default function Game() {
 
   const startGameBeta=()=>{
     setStarted(true);
+    ReactGA.event({
+      category: 'Button Clicks',
+      action: 'Multi player',
+    });
   }
   const createGame= async()=>{
     if(name===""){
