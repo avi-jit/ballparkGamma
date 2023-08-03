@@ -118,7 +118,9 @@ export default function Game() {
       
       if(data){
         const x =data;
-       
+        if(x.length===0){
+          window.location.reload();
+        }
         setQuestions(x);
         
       }
@@ -152,6 +154,9 @@ export default function Game() {
         .filter((item) => !item.description.includes(String("st century" || "nd century" || "th century")))
         // Filter cards which have bad data as submitted in https://github.com/tom-james-watson/wikitrivia/discussions/2
         ;
+        if(items.length===0){
+          window.location.reload();
+        }
       setItems(items);
     };
     const deletion=()=>{
