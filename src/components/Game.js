@@ -5,7 +5,7 @@ import axios from "axios";
 import createState from "../lib/create-state";
 import Board from "./Board";
 import Loading from "./Loading";
-import Mixpanel from 'mixpanel';
+import Mixpanel from 'mixpanel-browser';
 //import badCards from "../lib/bad-cards";
 import supabase from "./config/supabaseClient"
 import DropDown from "./DropDown";
@@ -233,6 +233,7 @@ export default function Game() {
       category: 'Button Clicks',
       action: 'Study mode',
     });
+    
     Mixpanel.track('Button Clicked', { button: 'Study Mode' });
     localStorage.setItem("study",!study);
   }
