@@ -5,7 +5,7 @@ import axios from "axios";
 import createState from "../lib/create-state";
 import Board from "./Board";
 import Loading from "./Loading";
-
+import Mixpanel from 'mixpanel';
 //import badCards from "../lib/bad-cards";
 import supabase from "./config/supabaseClient"
 import DropDown from "./DropDown";
@@ -74,11 +74,13 @@ export default function Game() {
   'Music facts',
   'Political facts',
   'Astronomical facts']));
+
   const [name,setname] = useState(localStorage.getItem("username")?localStorage.getItem("username"):"")
     const onHandleChange=(ele)=>{
         setname(ele.target.value)
         console.log(ele.target.value)
     }
+    Mixpanel.init('2a40b97bb7489509f0ac425303cd49d7');
   //const suffList = ['%','Billion gallons','Fahrenheit','GW.h','Gigawatt-hours','MW','Megawatt-hours','Million units','Terawatt-hours','billion tons','cm','cycles','degree celcius','degree celsius','degree fahrenheit','females','houses','inches','kilo metres','km square','metres','micrograms per cubic metre','million litres','million terajoules','mm','people','thousand tons','tons','years']
   useEffect(() => {
     function handleResize(){
@@ -231,6 +233,7 @@ export default function Game() {
       category: 'Button Clicks',
       action: 'Study mode',
     });
+    Mixpanel.track('Button Clicked', { button: 'Study Mode' });
     localStorage.setItem("study",!study);
   }
   
