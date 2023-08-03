@@ -21,9 +21,10 @@ import ReactGA from 'react-ga4';
 export default function Game() {
   const [audio] = useState(new Audio('audio/Only the Braves - FiftySounds.mp3'))
   const [state, setState] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
   const [started, setStarted] = useState(false);
   const [shareText, setShareText] = useState("Share Code");
+  // eslint-disable-next-line
   const [items, setItems] = useState(null);
   const [createdRoom, setCreatedRoom] = useState(localStorage.getItem("createdRoom")?localStorage.getItem("createdRoom"):"")
   const [questions, setQuestions] = useState(null);
@@ -157,6 +158,7 @@ export default function Game() {
         if(items.length===0){
           window.location.reload();
         }
+        
       setItems(items);
     };
     const deletion=()=>{
@@ -180,7 +182,7 @@ export default function Game() {
 
   useEffect(() => {
     const createStateAsync = async() => {
-      if (items !== null) {
+      if (questions !== null) {
         setState(await createState(questions));
         setLoaded(true);
         console.log("working")
@@ -242,8 +244,29 @@ export default function Game() {
     Mixpanel.track('Study mode clicked', { button: 'Study Mode' });
     localStorage.setItem("study",!study);
   }
-  
-  const startGame = async()=>{
+  const dataFetcher = async(tag)=>{
+    const {data, error} = await supabase
+    .from('ourWorld')
+    .select('*').eq('suffix',tag);
+    let y =[]
+    if(error){
+        console.log("error")
+        
+    }
+    console.log("dataFetcher working");
+    //console.log(data);
+    if(data){
+      y =data;
+      if(y.length===0){
+        //console.log(y);
+        dataFetcher(tag)
+      }
+      return y;
+      
+    }
+
+  }
+  const startGame = ()=>{
     ReactGA.event({
       category: 'Button Clicks',
       action: 'Single player',
@@ -265,24 +288,11 @@ export default function Game() {
       window.alert("Select atleast one deck.")
       return;
     }
-    let y = []
+    //let y = []
     const tag = suffs[Math.floor(Math.random()*suffs.length)]
     console.log(tag);
-    const {data, error} = await supabase
-    .from('ourWorld')
-    .select('*').eq('suffix',tag);
-
-    if(error){
-        console.log("error")
-        
-    }
-    
-    if(data){
-      y =data;
-     
-      //setQuestions(x);
-      
-    }
+    dataFetcher(tag).then((y)=>{
+      console.log(y);
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
@@ -317,6 +327,9 @@ export default function Game() {
       //console.log(questions);
     }
     setStarted(true);
+      
+    });
+    
   }
   
 
