@@ -292,14 +292,14 @@ export default function Game() {
     const tag = suffs[Math.floor(Math.random()*suffs.length)]
     console.log(tag);
     dataFetcher(tag).then((y)=>{
-      console.log(y);
+    console.log(y);
     const arr = []
     let x = 0;
     const countryArr = Array.from(countries);
     for(let i=0; i<countryArr.length; i++){
       const countr = countryArr[i];
       for(let j=0; j<questions.length; j++){
-        if(y[j].country===countr){
+        if(y[j]['country']===countr){
           arr.push(y[j]);
           //console.log(arr[x]);
           if(arr[x].answer>9999 && arr[x].answer<999999){
