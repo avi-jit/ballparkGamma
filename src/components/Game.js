@@ -243,7 +243,7 @@ export default function Game() {
       category: 'Button Clicks',
       action: 'Single player',
     });
-
+    Mixpanel.track('Single player clicked', { button: 'Single Player' });
     document.getElementById("loadingSingle").style.display = "block";
     if(localStorage.getItem('isMusicOn')===null||localStorage.getItem('isMusicOn')==="true"){
         
@@ -331,6 +331,7 @@ export default function Game() {
       category: 'Button Clicks',
       action: 'Multi player',
     });
+    Mixpanel.track('Multiplayer clicked', { button: 'Multi player' });
   }
   const createGame= async()=>{
     if(name===""){
