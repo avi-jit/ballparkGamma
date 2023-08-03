@@ -234,7 +234,7 @@ export default function Game() {
       action: 'Study mode',
     });
     
-    Mixpanel.track('Button Clicked', { button: 'Study Mode' });
+    Mixpanel.track('Study mode clicked', { button: 'Study Mode' });
     localStorage.setItem("study",!study);
   }
   
