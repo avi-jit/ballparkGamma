@@ -3,13 +3,13 @@ import { createClient } from '@supabase/supabase-js';
 import UserData from './UserData';
 import ReactGA from 'react-ga4';
 import Mixpanel from 'mixpanel-browser';
-
+Mixpanel.init('2a40b97bb7489509f0ac425303cd49d7');
 
 const supabase = createClient('https://hpcqpvygdcpwrzoldghm.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwY3FwdnlnZGNwd3J6b2xkZ2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjUwMzg0NTIsImV4cCI6MTk4MDYxNDQ1Mn0.-DVUVZlZGkiylcWqO7ROJ11Y86dyHcl7ex5985WDhr8');
 const StudyMode = () => {
   const [user, setUser] = useState(null);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  Mixpanel.init('2a40b97bb7489509f0ac425303cd49d7');
+  
 
   useEffect(() => {
     function handleResize(){
