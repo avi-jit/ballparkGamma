@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
 //import Avatar from '@mui/material/Avatar';
-
-
+import ReactGA from 'react-ga4';
+import Mixpanel from 'mixpanel-browser';
 import imageList from '../lib/imageList';
 import { createClient } from '@supabase/supabase-js';
 import StudyBoard from './StudyBoard';
@@ -26,6 +26,7 @@ const UserData = (props) => {
     const [highscore, setHighscore] = useState(
         Number(localStorage.getItem("highscore") ?? "0")
       );
+      Mixpanel.init('2a40b97bb7489509f0ac425303cd49d7');
     useEffect(()=>{
         const getQuestio = async()=>{
             // eslint-disable-next-line
@@ -80,6 +81,12 @@ const UserData = (props) => {
       }, []);
     
     const getQuestions = async(key)=>{
+        ReactGA.event({
+      category: 'Button Clicks',
+      action: key,
+    });
+    
+    Mixpanel.track(key, { button: "click" });
         document.getElementById("loading").style.display="block";
         setkeys(key);
         setMenu(true);
