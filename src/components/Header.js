@@ -19,7 +19,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import 'rodal/lib/rodal.css';
-
+import ReactGA from 'react-ga4';
+import Mixpanel from 'mixpanel-browser';
+Mixpanel.init('2a40b97bb7489509f0ac425303cd49d7');
 
 const darkTheme = createTheme({
     palette: {
@@ -334,14 +336,32 @@ function nearestHour(timeString) {
     
   };
   const handleCloseAboutMenu = () => {
+    ReactGA.event({
+      category: 'Button Clicks',
+      action: "About",
+    });
+    
+    Mixpanel.track("About", { button: "click" });
     setAnchorElNav(null);
     show();
   };
   const handleClosePlayMenu = () => {
+    ReactGA.event({
+      category: 'Button Clicks',
+      action: "How to play?",
+    });
+    
+    Mixpanel.track("How to play?", { button: "click" });
     setAnchorElNav(null);
     playRodalShow();
   };
   const handleCloseNotificationsMenu = () => {
+    ReactGA.event({
+      category: 'Button Clicks',
+      action: "Notifications",
+    });
+    
+    Mixpanel.track("Notifications", { button: "click" });
     setAnchorElNav(null);
     notRodalShow();
     //window.alert("-Android and Mac users: Change these settings from browser itself \n-iOS users: Go to Settings> Safari> Turn off Block Pop-ups\nThen go to Advanced> Experimental Eeatures> configure push API");
