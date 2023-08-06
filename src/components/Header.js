@@ -90,6 +90,12 @@ function Header() {
       console.log(`'beforeinstallprompt' event was fired.`);
       button.addEventListener('click', async () => {
         // Hide the app provided install promotion
+        ReactGA.event({
+          category: 'Button Clicks',
+          action: "Install PWA",
+        });
+        
+        Mixpanel.track("Install PWA", { button: "click" });
         div.style.display = 'none';
         // Show the install prompt
         deferredPrompt.prompt();
