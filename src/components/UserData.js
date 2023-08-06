@@ -83,10 +83,10 @@ const UserData = (props) => {
     const getQuestions = async(key)=>{
         ReactGA.event({
       category: 'Button Clicks',
-      action: key,
+      action: studySuff[key],
     });
     
-    Mixpanel.track(key, { button: "click" });
+    Mixpanel.track(studySuff[key], { button: "click" });
         document.getElementById("loading").style.display="block";
         setkeys(key);
         setMenu(true);
