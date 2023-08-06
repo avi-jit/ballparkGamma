@@ -1,5 +1,8 @@
 import React , {useState} from 'react'
 import supabase from "./config/supabaseClient"
+import ReactGA from 'react-ga4';
+import Mixpanel from 'mixpanel-browser';
+Mixpanel.init('2a40b97bb7489509f0ac425303cd49d7');
 export default function JoinRoom(props) {
     // eslint-disable-next-line
     const {questions,setJoinedRoomQuestions, name} = props;
@@ -10,6 +13,12 @@ export default function JoinRoom(props) {
         console.log(ele.target.value)
     }
     async function joinRoom(){
+        ReactGA.event({
+            category: 'Button Clicks',
+            action: "Join Room",
+          });
+          
+          Mixpanel.track("Join Room", { button: "click" });
         // eslint-disable-next-line
         const {data,error} = await supabase.from('gameRoom').select('*').eq("id",code);
         if(data.length===0 || error){

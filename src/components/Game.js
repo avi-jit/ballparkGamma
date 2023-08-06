@@ -352,6 +352,12 @@ export default function Game() {
     Mixpanel.track('Multiplayer clicked', { button: 'Multi player' });
   }
   const createGame= async()=>{
+    ReactGA.event({
+      category: 'Button Clicks',
+      action: "Create Room",
+    });
+    
+    Mixpanel.track("Create Room", { button: "click" });
     if(name===""){
       window.alert('Username is empty');
       return;
