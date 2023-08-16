@@ -135,7 +135,7 @@ export default function Board(props) {
       });
     }
     if(state.lives===0){
-      mixpanel.track('Game over', { score });
+      Mixpanel.track('Game over', { score });
       if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
         
           console.log("defeat");
