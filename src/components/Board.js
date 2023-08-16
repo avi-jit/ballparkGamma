@@ -10,6 +10,8 @@ import Hearts from "./Hearts";
 import GameOver from "./Game-over";
 import supabase from "./config/supabaseClient";
 import LobbyStats from "./LobbyStats";
+import Mixpanel from 'mixpanel-browser';
+Mixpanel.init('2a40b97bb7489509f0ac425303cd49d7');
 
 export default function Board(props) {
   const { highscore, resetGame, state, setState, updateHighscore, createdRoom, name} = props;
@@ -133,6 +135,7 @@ export default function Board(props) {
       });
     }
     if(state.lives===0){
+      mixpanel.track('Game over', { score });
       if(localStorage.getItem('isSoundOn')===null||localStorage.getItem('isSoundOn')==="true"){
         
           console.log("defeat");
