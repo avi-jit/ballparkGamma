@@ -532,9 +532,9 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
               
                 <h4 style={{marginTop:"5px", paddingLeft:screenWidth>480?"50px":"20px",paddingTop:"10px", paddingBottom:"10px", fontWeight:"bold"}}>Place the cards on the numberline in the correct order.</h4>
       </div>
-      <div style={{width:"70%", margin:"auto"}}>
+      <div style={{width:"98%", margin:"auto"}}>
         <div className="input-group mb-3">
-        <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        <input style={{borderRadius:"15px"}} type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
         <div className="input-group-append">
             
             

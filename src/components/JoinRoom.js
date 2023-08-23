@@ -55,9 +55,9 @@ export default function JoinRoom(props) {
 
   return (
     <>
-    <div style={{width:"70%", margin:"auto"}}>
+    <div style={{width:"98%", margin:"auto"}}>
         <div className="input-group mb-3">
-        <input type="text" className="form-control" value={code} onChange={onHandleChange} placeholder="Game code" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        <input style={{borderRadius:"15px"}} type="text" className="form-control" value={code} onChange={onHandleChange} placeholder="Game code" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
         <div className="input-group-append">
             
             
@@ -68,8 +68,8 @@ export default function JoinRoom(props) {
           
     </div>
     <div>
-        <button className="btn btn-info" style={{width:"34%", marginRight:"2%"}} onClick={joinRoom}>Join Game</button>
-        <button className="btn btn-info " style={{width:"34%"}} onClick={()=>{window.location.reload()}}>Leave Game</button>
+        <button className="btn btn-info rounded-pill" style={{width:"34%", marginRight:"2%"}} onClick={joinRoom}>Join Game</button>
+        <button className="btn btn-info rounded-pill" style={{width:"34%"}} onClick={()=>{window.location.reload()}}>Leave Game</button>
       </div> 
     </>
     
