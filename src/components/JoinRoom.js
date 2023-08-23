@@ -55,7 +55,8 @@ export default function JoinRoom(props) {
 
   return (
     <>
-    <div style={{width:"98%", margin:"auto"}}>
+    
+    <div style={{margin:"15px"}}>
         <div className="input-group mb-3">
         <input style={{borderRadius:"15px"}} type="text" className="form-control" value={code} onChange={onHandleChange} placeholder="Game code" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
         <div className="input-group-append">
