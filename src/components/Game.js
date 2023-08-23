@@ -517,8 +517,21 @@ const setJoinedRoomQuestions = useCallback((roomQues,code)=>{
   if(joiningRoom){
     return(
       <>
-      <h2 style={{color:"white", textTransform: "uppercase",marginTop:"20px"}}>Place the cards on the numberline in the correct order.</h2>
-      <h2 style={{color:"white", textTransform: "uppercase"}}>Multiplayer</h2>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",backgroundColor:"white", color:"black", margin:"15px", borderRadius:"10px"}}>
+            <br />
+          <div style={{textAlign:"left", flex:1, wordBreak:"break-word"}}>
+            <h1 style={{marginLeft:screenWidth>480?"50px":"20px", fontWeight:"bold"}}>Multi Player</h1>
+          <h4 style={{marginLeft:"50px", display:screenWidth>480?"block":"none"}} >Mode</h4>
+          
+          </div>
+          <img src="/images/home.webp" alt="h" style={{textAlign:"right", height: screenWidth>480?"300px":"130px", margin:"15px"}} />
+          <br />
+          </div>
+          
+            <div style={{backgroundColor:"white", borderRadius:"15px", textAlign:"left", margin:"15px"}}>
+              
+                <h4 style={{marginTop:"5px", paddingLeft:screenWidth>480?"50px":"20px",paddingTop:"10px", paddingBottom:"10px", fontWeight:"bold"}}>Place the cards on the numberline in the correct order.</h4>
+      </div>
       <div style={{width:"70%", margin:"auto"}}>
         <div className="input-group mb-3">
         <input type="text" className="form-control" value={name} onChange={onHandleChange} placeholder="Username (Should be unique)" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
