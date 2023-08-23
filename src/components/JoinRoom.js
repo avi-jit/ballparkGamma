@@ -69,8 +69,9 @@ export default function JoinRoom(props) {
           
     </div>
     <div>
-        <button className="btn btn-info rounded-pill" style={{width:"34%", marginRight:"2%"}} onClick={joinRoom}>Join Game</button>
-        <button className="btn btn-info rounded-pill" style={{width:"34%"}} onClick={()=>{window.location.reload()}}>Leave Game</button>
+        <button className="btn btn-info"  style={{width:"34%", marginRight:"2%",borderRadius:"15px"}} onClick={joinRoom}>Join Game</button>
+        <button className="btn btn-info" style={{width:"34%",borderRadius:"15px"}} onClick={()=>{window.location.reload()}}>Leave Game</button>
+      <br />
       </div> 
     </>
     
