@@ -377,6 +377,10 @@ function nearestHour(timeString) {
     setAnchorElNav(null);
     window.location.reload();
   };
+  const handleCloseFeedMenu=()=>{
+    setAnchorElNav(null);
+    window.location.href='https://forms.gle/dJhvxb7dbH3v4bjG9';
+  }
   
   
  
@@ -459,6 +463,9 @@ function nearestHour(timeString) {
                 </MenuItem>
                 <MenuItem key={6} onClick={handleClosePlayMenu}>
                   <Typography textAlign="center" href="/">How to play?</Typography>
+                </MenuItem>
+                <MenuItem key={7} onClick={handleCloseFeedMenu}>
+                  <Typography textAlign="center" href="/">Feedback</Typography>
                 </MenuItem>
               
             </Menu>
@@ -555,6 +562,15 @@ function nearestHour(timeString) {
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 How to play? 
+                
+              </Button>
+              <Button
+                key={8}
+                className="feedToggle"
+                onClick={handleCloseFeedMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Feedback 
                 
               </Button>
             
